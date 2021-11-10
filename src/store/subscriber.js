@@ -4,9 +4,9 @@ import store from "@/store";
 store.subscribe((mutation) => {
   switch (mutation.type) {
     case "auth/SET_TOKEN":
-      console.log(`hi ${mutation.payload}`);
+      // console.log(`hi ${mutation.payload}`);
       if (mutation.payload) {
-        console.log(mutation.payload);
+        // console.log(mutation.payload);
 
         const data = mutation.payload;
         const myJson = JSON.stringify(data);

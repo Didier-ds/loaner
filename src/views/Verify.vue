@@ -53,7 +53,7 @@ export default {
       store
         .dispatch("auth/verify", otp)
         .then(() => {
-          router.push({ path: "/dashboard" });
+          router.push({ path: "/" });
         })
         .catch();
     };

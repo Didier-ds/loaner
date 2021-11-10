@@ -227,7 +227,7 @@ export default {
       // eslint-disable-next-line no-underscore-dangle
       //  const _this = this;
       const result = await this.v$.$validate();
-      console.log(result);
+      // console.log(result);
       if (!result) {
         // notify user form is invalid
         return;

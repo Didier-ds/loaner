@@ -6,7 +6,7 @@ export const validName = (name) => {
   return false;
 };
 export const focusNextInput = (from, to) => {
-  console.log(from.target);
+  // console.log(from.target);
   if (from.value.length) {
     document.getElementById(to).focus();
   }

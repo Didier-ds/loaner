@@ -16,7 +16,7 @@ export default {
   },
   otp(otp) {
     const data = { otp: +otp };
-    console.log(otp);
+    // console.log(otp);
     return apiClient.post("/complete-login", data, { headers: authHeader() });
   },
 };

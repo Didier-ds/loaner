@@ -37,7 +37,7 @@ export default {
     login({ commit }, data) {
       return auth.login(data).then(
         (res) => {
-          console.log(res.data);
+          // console.log(res.data);
           commit("SET_TOKEN", res.data.data.TokenString);
           authHeader();
           return Promise.resolve(res);
@@ -48,7 +48,7 @@ export default {
       // .then((res) => commit('SET_TOKEN',res.data.TokenString));
     },
     register(_, data) {
-      auth.register(data).then((res) => console.log(res));
+      auth.register(data).then();
     },
     verify({ commit }, data) {
       return auth.otp(data).then(
