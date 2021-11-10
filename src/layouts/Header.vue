@@ -1,10 +1,8 @@
 <template>
   <div class="flex relative flex-row justify-between items-center">
     <div class="logo">
-      <div class="desktop_logo hidden sm:block">
-        <img class="w-full" src="@/assets/img/desktop_logo.svg" />
-      </div>
-      <div class="mobile_logo block sm:hidden">
+      
+      <div class="mobile_logo block">
         <img class="w-full" src="@/assets/img/mobile_logo.svg" />
       </div>
     </div>
