@@ -3,7 +3,7 @@
     <div class="card_box flex flex-col my-4 sm:grid grid-cols-2 gap-4">
       <div class="portfolio_card relative p-2 flex justify-center items-center">
         <p class="title absolute top-0 m-2 mx-4 left-0">Your Portfolio Value:</p>
-        <p class="value text-3xl font-bold">$20,000.00</p>
+        <p class="value text-3xl font-bold">${{ formatCurrency(total) }}</p>
       </div>
       <div class="little_card_box grid grid-cols-2 gap-4">
         <CardBtn :text="'Apply For A New Loan'" :img="'arrow'" :route="'Loan'" />
@@ -34,6 +34,11 @@ export default {
     const store = useStore();
     return {
       portfolios: computed(() => store.getters["auth/portfolios"]),
+      total: computed(() => {
+        const all = store.getters["auth/portfolios"];
+        if (all.length <= 0) return 0;
+        return all.length;
+      }),
     };
   },
   components: {
