@@ -3,7 +3,7 @@
     <div class="form_box">
       <div id="logo" class="my-4">
         <div class="desktop_logo">
-          <img src="@/assets/img/desktop_logo.svg" />
+          <img src="@/assets/img/mobile_logo.svg" />
         </div>
         <!-- <div class="mobile_logo">
                     <img src="@/assets/img/mobile_logo.svg" />
