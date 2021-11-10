@@ -1,3 +1,5 @@
+import { refs } from "vue";
+
 export const validName = (name) => {
   const validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
   if (validNamePattern.test(name)) {
@@ -5,9 +7,12 @@ export const validName = (name) => {
   }
   return false;
 };
+
 export const focusNextInput = (from, to) => {
-  // console.log(from.target);
-  if (from.value.length) {
-    document.getElementById(to).focus();
+  // const d = document.body.getElementById(from)
+  // const first = ref(null)
+  console.log(refs());
+  if (refs(from).value.length) {
+    document.body.getElementById(to).focus();
   }
 };

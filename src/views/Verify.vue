@@ -10,12 +10,47 @@
         <div>
           <form @submit.prevent="submit" class="flex flex-col justify-center items-center">
             <div class="flex items-center flex-wrap justify-center my-2">
-              <input type="tel" v-model="first" id="first" maxlength="1" class="border" />
-              <input type="tel" v-model="second" id="second" maxlength="1" class="border" />
-              <input type="tel" v-model="third" id="third" maxlength="1" class="border" />
-              <input type="tel" v-model="fourth" id="fourth" maxlength="1" class="border" />
-              <input type="tel" v-model="fifth" id="fifth" maxlength="1" class="border" />
-              <input type="tel" v-model="sixth" id="sixth" maxlength="1" class="border" />
+              <input
+                type="tel"
+                v-model="data.num1"
+                ref="first"
+                @keyup="next('first', 'second')"
+                maxlength="1"
+                class="border"
+              />
+              <input
+                type="tel"
+                v-model="data.num2"
+                ref="second"
+                @keyup="next('second', 'third')"
+                maxlength="1"
+                class="border"
+              />
+              <input
+                type="tel"
+                v-model="data.num3"
+                ref="third"
+                @keyup="next('third', 'fourth')"
+                maxlength="1"
+                class="border"
+              />
+              <input
+                type="tel"
+                v-model="data.num4"
+                ref="fourth"
+                @keyup="next('fourth', 'fifth')"
+                maxlength="1"
+                class="border"
+              />
+              <input
+                type="tel"
+                v-model="data.num5"
+                ref="fifth"
+                @keyup="next('fifth', 'sixth')"
+                maxlength="1"
+                class="border"
+              />
+              <input type="tel" v-model="data.num6" ref="sixth" maxlength="1" class="border" />
             </div>
             <button type="submit" class="bg-black rounded px-4 py-2 text-white font-medium">
               Verify
@@ -28,16 +63,13 @@
 </template>
 <script>
 import { reactive, toRefs } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-import { focusNextInput } from "@/utils";
+import { mapActions } from "vuex";
+// import { focusNextInput } from "@/utils";
 
 export default {
   name: "Verify",
   setup() {
-    const store = useStore();
-    const router = useRouter();
-    const values = reactive({
+    const inputs = reactive({
       first: "",
       second: "",
       third: "",
@@ -45,23 +77,38 @@ export default {
       fifth: "",
       sixth: "",
     });
-    const { first, second, third, fourth, fifth, sixth } = toRefs(values);
-
-    const submit = () => {
-      const otp =
-        values.first + values.second + values.third + values.fourth + values.fifth + values.sixth;
-      store
-        .dispatch("auth/verify", otp)
-        .then(() => {
-          router.push({ path: "/" });
-        })
-        .catch();
+    const { first, second, third, fourth, fifth, sixth } = toRefs(inputs);
+    const next = (from, to) => {
+      console.log(inputs[from].value);
+      if (inputs[from].value.length) {
+        inputs[to].focus();
+      }
     };
-    return { first, second, third, fourth, fifth, sixth, submit };
+
+    return { first, second, third, fourth, fifth, sixth, next };
+  },
+  data() {
+    return {
+      data: {
+        num1: "",
+        num2: "",
+        num3: "",
+        num4: "",
+        num5: "",
+        num6: "",
+      },
+    };
   },
   methods: {
-    next(from, to) {
-      focusNextInput(from, to);
+    ...mapActions({
+      verify: "auth/verify",
+    }),
+    submit() {
+      const { num1, num2, num3, num4, num5, num6 } = this.data;
+      const otp = num1 + num2 + num3 + num4 + num5 + num6;
+      this.verify(otp).then(() => {
+        this.$router.push({ path: "/" });
+      });
     },
   },
 };
