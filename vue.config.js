@@ -1,10 +1,8 @@
 module.exports = {
-  
-  // css: {
-  //   loaderOptions: {
-  //     sass: {
-  //       implementation: require('sass'),
-  //     },
-  //   },
-  // },
-};
+  pwa: {
+    workboxOptions: {
+      skipWaiting: true,
+      clientsClaim: true,
+    }
+  }
+}
