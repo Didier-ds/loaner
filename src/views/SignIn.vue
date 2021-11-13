@@ -10,7 +10,7 @@
                 </div> -->
       </div>
       <div class="head_text my-2">
-        <p class="font-bold text-2xl">Log n to Your Account</p>
+        <p class="font-bold text-2xl">Log In to Your Account</p>
       </div>
       <div class="my-4">
         <div v-error>{{ errMessage }}</div>
