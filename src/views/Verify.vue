@@ -8,6 +8,7 @@
         </div>
 
         <div>
+          <p v-error>{{ errMessage }}</p>
           <form @submit.prevent="submit" class="flex flex-col justify-center items-center">
             <div class="flex items-center flex-wrap justify-center my-2">
               <input
@@ -52,8 +53,11 @@
               />
               <input type="tel" v-model="data.num6" ref="sixth" maxlength="1" class="border" />
             </div>
-            <button type="submit" class="bg-black rounded px-4 py-2 text-white font-medium">
-              Verify
+            <button
+              type="submit"
+              class="bg-black rounded flex items-center px-4 py-2 text-white font-medium"
+            >
+              <BtnSpinner v-if="isSpin" /><span class="px-2">Verify</span>
             </button>
           </form>
         </div>
@@ -64,6 +68,7 @@
 <script>
 import { reactive, toRefs } from "vue";
 import { mapActions } from "vuex";
+import BtnSpinner from "@/components/reusables_/BtnSpinner.vue";
 // import { focusNextInput } from "@/utils";
 
 export default {
@@ -87,8 +92,13 @@ export default {
 
     return { first, second, third, fourth, fifth, sixth, next };
   },
+  components: {
+    BtnSpinner,
+  },
   data() {
     return {
+      isSpin: false,
+      errMessage: "",
       data: {
         num1: "",
         num2: "",
@@ -103,12 +113,24 @@ export default {
     ...mapActions({
       verify: "auth/verify",
     }),
-    submit() {
+    async submit() {
       const { num1, num2, num3, num4, num5, num6 } = this.data;
       const otp = num1 + num2 + num3 + num4 + num5 + num6;
-      this.verify(otp).then(() => {
-        this.$router.push({ path: "/" });
-      });
+      this.isSpin = true;
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve(
+            this.verify(otp)
+              .then(() => {
+                this.$router.push({ path: "/" });
+              })
+              .catch((err) => {
+                this.errMessage = err.response.data.message;
+              })
+          );
+        }, 1000)
+      );
+      this.isSpin = false;
     },
   },
 };

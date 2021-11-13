@@ -13,6 +13,7 @@
         <p class="font-bold text-2xl">Log In to Your Account</p>
       </div>
       <div class="my-4">
+        <div v-error>{{ errMessage }}</div>
         <form @submit.prevent="submit">
           <div class="input_box">
             <label class="input_label">Your Phone or Email</label>
@@ -61,41 +62,7 @@
               </span>
             </div>
           </div>
-          <button
-            class="
-              button_box
-              bg-black
-              px-4
-              py-2
-              my-2
-              hover:pr-4
-              cursor-pointer
-              rounded
-              w-full
-              flex flex-row
-              justify-between
-              items-center
-              input_box
-            "
-          >
-            <p class="text-white text-lg font-medium">Log in</p>
-            <svg
-              class="swipe"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 5L16 12L9 19"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
+          <WideBtn :isSpin="isSpin">Log In</WideBtn>
           <hr class="my-4" />
           <p>
             New on loaner?
@@ -126,7 +93,9 @@ export default {
   },
   data() {
     return {
+      isSpin: false,
       user: new User("", ""),
+      errMessage: "",
     };
   },
   methods: {
@@ -134,17 +103,27 @@ export default {
       login: "auth/login",
     }),
     async submit() {
-      // eslint-disable-next-line no-underscore-dangle
-      //  const _this = this;
       const result = await this.v$.$validate();
 
       if (!result) {
         // notify user form is invalid
         return;
       }
-      this.login(this.user).then(() => {
-        this.$router.push({ name: "Verify" });
-      });
+      this.isSpin = true;
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve(
+            this.login(this.user)
+              .then(() => {
+                this.$router.push({ name: "Verify" });
+              })
+              .catch((err) => {
+                this.errMessage = err.response.data.message;
+              })
+          );
+        }, 1000)
+      );
+      this.isSpin = false;
     },
   },
   validations() {
