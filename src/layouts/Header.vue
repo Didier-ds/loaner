@@ -1,7 +1,6 @@
 <template>
   <div class="flex relative flex-row justify-between items-center">
     <div class="logo">
-      
       <div class="mobile_logo block">
         <img class="w-full" src="@/assets/img/mobile_logo.svg" />
       </div>
@@ -11,7 +10,7 @@
         <div class="w-10">
           <img class="w-full" src="@/assets/img/Face.png" />
         </div>
-        <span class="hidden sm:block pl-2">{{ fullname }}</span>
+        <span class="hidden sm:block capitalize pl-2">{{ fullname }}</span>
         <div>
           <svg
             width="20"

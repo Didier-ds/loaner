@@ -7,6 +7,7 @@ import CreateAccount from "@/views/CreateAccount.vue";
 import Overview from "@/views/Overview.vue";
 import Loan from "@/views/Loan.vue";
 import EmailVerify from "@/views/VerifyEmail.vue";
+import MarketPlace from "@/views/MarketPlace.vue";
 import Dashboard from "@/layouts/Index.vue";
 import store from "@/store";
 
@@ -26,6 +27,11 @@ const routes = [
         path: "/loan",
         name: "Loan",
         component: Loan,
+      },
+      {
+        path: "/marketplace",
+        name: "MarketPlace",
+        component: MarketPlace,
       },
     ],
   },

@@ -19,7 +19,9 @@
         px-4
       "
     >
-      <span class="absolute top-0 right-0 px-2">{{ stock.percentage_change }}</span>
+      <span class="absolute top-0 right-0 px-2 text-xs text-green-600 font-medium">{{
+        stock.percentage_change
+      }}</span>
       <div class="stock_name_container my-2 flex-grow flex items-center">
         <div class="border p-2 w-12 rounded-3xl">
           <img :src="stock.image_url" class="w-full" />
@@ -31,15 +33,15 @@
       </div>
       <div class="stock_details border-t sm:border-0 py-2 w-full my-2 grid grid-cols-3 gap-10">
         <div class="text-center">
-          <p class="font-medium text-gray-500 text-xs">Volume</p>
-          <p>{{ stock.volume }}</p>
-        </div>
-        <div class="text-center">
-          <p class="font-medium text-gray-500 text-xs">Price Share</p>
-          <p>5</p>
+          <p class="font-medium text-gray-500 text-xs">Quantity</p>
+          <p>{{ stock.quantity }}</p>
         </div>
         <div class="text-center">
           <p class="font-medium text-gray-500 text-xs">Equity Value</p>
+          <p>{{ stock.equity_value }}</p>
+        </div>
+        <div class="text-center">
+          <p class="font-medium text-gray-500 text-xs">Unit Price</p>
           <p class="ibm font-bold">${{ stock.unit_price }}</p>
         </div>
       </div>
@@ -48,7 +50,7 @@
 </template>
 <script>
 export default {
-  name: "StockCard",
+  name: "UserStockCard",
   props: ["stock", "index"],
 };
 </script>

@@ -7,7 +7,7 @@
       </div>
       <div class="little_card_box grid grid-cols-2 gap-4">
         <CardBtn :text="'Apply For A New Loan'" :img="'arrow'" :route="'Loan'" />
-        <CardBtn :text="'Click to Buy Stocks'" :img="'add'" :route="'Stocks'" />
+        <CardBtn :text="'Click to Buy Stocks'" :img="'add'" :route="'MarketPlace'" />
       </div>
     </div>
     <div class="stocks_list">
@@ -16,7 +16,12 @@
         <Empty />
       </template>
       <template v-else>
-        <StockCard v-for="index in portfolios" :key="index" :index="index" />
+        <UserStockCard
+          v-for="(stock, index) in portfolios"
+          :key="index"
+          :stock="stock"
+          :index="index"
+        />
       </template>
     </div>
   </div>
@@ -25,7 +30,7 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
 import Empty from "@/components/reusables_/Empty.vue";
-import StockCard from "@/components/reusables_/StockCard.vue";
+import UserStockCard from "@/components/reusables_/UserStockCard.vue";
 import CardBtn from "@/components/reusables_/CardBtn.vue";
 
 export default {
@@ -37,12 +42,13 @@ export default {
       total: computed(() => {
         const all = store.getters["auth/portfolios"];
         if (all.length <= 0) return 0;
-        return all.length;
+
+        return all.reduce((a, b) => +a.unit_price + +b.unit_price);
       }),
     };
   },
   components: {
-    StockCard,
+    UserStockCard,
     CardBtn,
     Empty,
   },
