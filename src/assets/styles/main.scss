@@ -21,7 +21,7 @@ body {
     border-left-color: #0c1825;
   }
 .form_page {
-  min-height: 100vh;
+  
   display: flex;
   padding: 0 1em;
   flex-direction: column;
@@ -70,6 +70,9 @@ body {
     }
   }
 }
+.min {
+  min-height: 100vh;
+}
 .ibm {
   font-family: "IBM Plex Mono", monospace;
 }
@@ -96,6 +99,10 @@ body {
   max-width: 95%;
   margin: 1em auto;
   // margin-top: 3em;
+}
+.profile_container {
+  max-width: 50em;
+  width: 100%;
 }
 @media (min-width: 649px) {
   .page_container {

@@ -1,11 +1,21 @@
 <template>
-  <div v-click-away="close" class="menudropdown rounded p-2 shadow bg-white w-full">
+  <div v-click-away="close" class="menudropdown border rounded p-2 shadow bg-white w-full">
     <div>
-      <p class="font-medium">{{ fullname }}</p>
+      <p class="px-2 font-medium">{{ fullname }}</p>
     </div>
-    <div>
-      <ul class="my-2">
-        <li class="hover:bg-gray-200 p-2 font-medium">Profile</li>
+    <div class="my-2">
+      <ul class="">
+        <li
+          @click="$router.push({ name: 'Profile' })"
+          class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium"
+        >
+          Profile
+        </li>
+      </ul>
+      <ul class="">
+        <li class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium">
+          Logout
+        </li>
       </ul>
     </div>
   </div>
@@ -32,9 +42,9 @@ export default {
 </script>
 <style lang="scss">
 .menudropdown {
-  max-width: 240px;
+  max-width: 200px;
   position: absolute;
-  bottom: -120px;
+  bottom: -155px;
   right: 0;
   z-index: 2;
 }

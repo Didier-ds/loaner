@@ -7,8 +7,8 @@
     </div>
     <div class="">
       <div @click="toggleModal()" class="profile_name flex items-center">
-        <div class="w-10">
-          <img class="w-full" src="@/assets/img/Face.png" />
+        <div class="">
+          <ProfilePic :name="fullname" :isSize="'small'" />
         </div>
         <span class="hidden sm:block capitalize pl-2">{{ fullname }}</span>
         <div>
@@ -28,25 +28,27 @@
           </svg>
         </div>
       </div>
-      <MenuDropDown @toggleModal="toggleModal" v-if="isRequest" />
+      <transition name="fade">
+        <MenuDropDown @toggleModal="toggleModal" v-if="isRequest" />
+      </transition>
     </div>
   </div>
 </template>
 <script>
-import { computed, ref } from "vue";
-import { useStore } from "vuex";
+import { ref } from "vue";
+// import { useStore } from "vuex";
+
 import MenuDropDown from "@/components/reusables_/MenuDropdown.vue";
 
 export default {
   name: "Header",
   setup() {
-    const store = useStore();
     const isRequest = ref(false);
     const toggleModal = () => {
       isRequest.value = !isRequest.value;
     };
     return {
-      fullname: computed(() => store.getters["auth/fullname"]),
+      // fullname: computed(() => store.getters["auth/fullname"]),
       isRequest,
       toggleModal,
     };
@@ -65,5 +67,12 @@ export default {
 .mobile_logo {
   // display: none;
   max-width: 2.5em;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.2s ease-in-out;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

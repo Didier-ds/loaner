@@ -13,22 +13,18 @@
         justify-between
         sm:items-center
         border
-        relative
         rounded
         p-2
         px-4
       "
     >
-      <span class="absolute top-0 right-0 px-2 text-xs text-green-600 font-medium">{{
-        stock.percentage_change
-      }}</span>
       <div class="stock_name_container my-2 flex-grow flex items-center">
         <div class="border p-2 w-12 rounded-3xl">
           <img :src="stock.image_url" class="w-full" />
         </div>
         <div class="mx-4 flex-grow">
           <p class="stock_abbr font-bold">{{ stock.symbol }}</p>
-          <p class="stock_fullname text-gray-500">Awenemen</p>
+          <span class="px-2 text-xs text-green-600 font-medium">{{ stock.percentage_change }}</span>
         </div>
       </div>
       <div class="stock_details border-t sm:border-0 py-2 w-full my-2 grid grid-cols-3 gap-10">
@@ -67,7 +63,7 @@ export default {
 @keyframes fadeUpOpacity {
   20% {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(50px);
   }
   100% {
     opacity: 1;

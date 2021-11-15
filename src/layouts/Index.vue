@@ -22,6 +22,13 @@ export default {
     Header,
     GoBack,
   },
+  mounted() {
+    this.$notify({
+      title: "Welcome",
+      type: "success",
+      message: "",
+    });
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="card_box flex flex-col my-4 sm:grid grid-cols-2 gap-4">
-      <div class="portfolio_card relative p-2 flex justify-center items-center">
-        <p class="title absolute top-0 m-2 mx-4 left-0">Your Portfolio Value:</p>
-        <p class="value text-3xl font-bold">${{ formatCurrency(total) }}</p>
+      <div class="portfolio_card relative p-2 flex flex-col justify-between">
+        <div>
+          <p class="title pl-2">Portfolio Value:</p>
+          <p class="value text-3xl font-bold text-center">${{ formatCurrency(total) }}</p>
+        </div>
+        <div>
+          <p class="title pl-2">Available Balance:</p>
+          <p class="value text-3xl font-bold text-center">${{ formatCurrency(total) }}</p>
+        </div>
       </div>
       <div class="little_card_box grid grid-cols-2 gap-4">
         <CardBtn :text="'Apply For A New Loan'" :img="'arrow'" :route="'Loan'" />
@@ -29,6 +35,7 @@
 <script>
 import { useStore } from "vuex";
 import { computed } from "vue";
+
 import Empty from "@/components/reusables_/Empty.vue";
 import UserStockCard from "@/components/reusables_/UserStockCard.vue";
 import CardBtn from "@/components/reusables_/CardBtn.vue";
@@ -52,5 +59,6 @@ export default {
     CardBtn,
     Empty,
   },
+  mounted() {},
 };
 </script>

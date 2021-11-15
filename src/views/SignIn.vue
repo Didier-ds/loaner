@@ -1,5 +1,5 @@
 <template>
-  <div class="form_page">
+  <div class="form_page min">
     <div class="form_box">
       <div id="logo" class="my-4">
         <div class="desktop_logo">

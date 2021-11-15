@@ -1,18 +1,8 @@
 <template>
-  <div class="form_page min">
-    <div class="form_box">
-      <div id="logo" class="my-4">
-        <div class="desktop_logo">
-          <img src="@/assets/img/mobile_logo.svg" />
-        </div>
-        <!-- <div class="mobile_logo">
-                    <img src="@/assets/img/mobile_logo.svg" />
-                </div> -->
-      </div>
-      <div class="head_text my-2">
-        <p class="font-bold text-2xl">Create Your Account</p>
-      </div>
-      <div class="my-4">
+  <div class="form_page">
+    <ProfilePic :name="fullname" />
+    <div class="profile_container">
+      <div class="">
         <form @submit.prevent="submit()">
           <div class="grid gap-4 grid-cols-2">
             <div class="input_box">
@@ -150,20 +140,9 @@
               </span>
             </div>
           </div>
-          <WideBtn :isSpin="isSpin">Register</WideBtn>
-          <hr class="my-4" />
-          <p>
-            Already Have Account?
-            <span class="text-blue-600 px-2 hover:underline hover:text-black">
-              <router-link to="/login">Click to Sign In</router-link>
-            </span>
-          </p>
+          <WideBtn :isSpin="isSpin">Update</WideBtn>
         </form>
       </div>
-    </div>
-
-    <div>
-      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -175,7 +154,7 @@ import { validName } from "@/utils";
 import User from "../models/user";
 
 export default {
-  name: "CreateAccount",
+  name: "Profile",
   setup() {
     return { v$: useVuelidate() };
   },
@@ -191,8 +170,6 @@ export default {
       register: "auth/register",
     }),
     async submit() {
-      // eslint-disable-next-line no-underscore-dangle
-      //  const _this = this;
       const result = await this.v$.$validate();
       // console.log(result);
       if (!result) {
@@ -200,19 +177,19 @@ export default {
         return;
       }
       this.isSpin = true;
-      await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve(
-            this.register(this.form)
-              .then(() => {
-                this.$router.push({ name: "EmailVerify" });
-              })
-              .catch((err) => {
-                this.errMessage = err.response.data.message;
-              })
-          );
-        }, 1000)
-      );
+      //   await new Promise((resolve) =>
+      //     setTimeout(() => {
+      //       resolve(
+      //         this.register(this.form)
+      //           .then(() => {
+      //             this.$router.push({ name: "EmailVerify" });
+      //           })
+      //           .catch((err) => {
+      //             this.errMessage = err.response.data.message;
+      //           })
+      //       );
+      //     }, 1000)
+      //   );
 
       this.isSpin = false;
     },
