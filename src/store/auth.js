@@ -1,10 +1,11 @@
 import auth from "@/services/auth";
+import { user } from "@/utils";
 
 export default {
   namespaced: true,
   state: {
     token: null,
-    user: null,
+    user: user(),
   },
   getters: {
     fullname(state) {
