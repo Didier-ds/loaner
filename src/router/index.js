@@ -78,8 +78,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  // eslint-disable-next-line no-unused-vars
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 };
+  },
 });
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   Nprogress.start();
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (store.getters["auth/isAuthenticated"]) {
