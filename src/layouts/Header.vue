@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="">
-      <div @click="toggleModal()" class="profile_name flex items-center">
+      <div @click="toggleModal()" class="profile_name select-none flex items-center">
         <div class="">
           <ProfilePic :name="fullname" :isSize="'small'" />
         </div>

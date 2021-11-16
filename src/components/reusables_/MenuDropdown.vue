@@ -1,7 +1,7 @@
 <template>
   <div v-click-away="close" class="menudropdown border rounded p-2 shadow bg-white w-full">
     <div>
-      <p class="px-2 font-medium">{{ fullname }}</p>
+      <p class="px-2 font-medium capitalize select-none">{{ fullname }}</p>
     </div>
     <div class="my-2">
       <ul class="">
@@ -21,16 +21,10 @@
   </div>
 </template>
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
-
 export default {
   name: "MenuDropdown",
   setup() {
-    const store = useStore();
-    return {
-      fullname: computed(() => store.getters["auth/fullname"]),
-    };
+    return {};
   },
 
   methods: {
