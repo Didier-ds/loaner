@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import VueClickAway from "vue3-click-away";
 // import  from 'element-plus'
 import "element-plus/dist/index.css";
-import { ElNotification, ElementPlus } from "element-plus";
+import { ElNotification, ElementPlus, ElScrollbar } from "element-plus";
 import mixins from "./mixins";
 // import fullname from './mixins/fullname';
 import App from "./App.vue";
@@ -26,4 +26,11 @@ app.directive("error", {
     ele.style.fontSize = `${12}px`;
   },
 });
-app.mixin(mixins).use(ElementPlus).use(VueClickAway).use(store).use(router).mount("#app");
+app
+  .mixin(mixins)
+  .use(ElementPlus)
+  .use(ElScrollbar)
+  .use(VueClickAway)
+  .use(store)
+  .use(router)
+  .mount("#app");

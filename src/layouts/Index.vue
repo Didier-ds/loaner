@@ -1,16 +1,18 @@
 <template>
-  <div id="main-page" class="mx-auto pt-4">
-    <Header />
-    <div class="page_container">
-      <div v-show="$route.name != 'Overview'" class="inline-block">
-        <GoBack />
+  <el-scrollbar height="100vh">
+    <div id="main-page" class="mx-auto pt-4">
+      <Header />
+      <div class="page_container">
+        <div v-show="$route.name != 'Overview'" class="inline-block">
+          <GoBack />
+        </div>
+        <div>
+          <p class="font-bold text-2xl">{{ $route.name }}</p>
+        </div>
+        <router-view />
       </div>
-      <div>
-        <p class="font-bold text-2xl">{{ $route.name }}</p>
-      </div>
-      <router-view />
     </div>
-  </div>
+  </el-scrollbar>
 </template>
 <script>
 import Header from "./Header.vue";

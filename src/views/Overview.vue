@@ -8,7 +8,7 @@
         </div>
         <div>
           <p class="title pl-2">Available Balance:</p>
-          <p class="value text-3xl font-bold text-center">${{ formatCurrency(total) }}</p>
+          <p class="value text-3xl font-bold text-center">${{ formatCurrency(0) }}</p>
         </div>
       </div>
       <div class="little_card_box grid grid-cols-2 gap-4">

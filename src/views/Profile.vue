@@ -1,6 +1,7 @@
 <template>
   <div class="form_page">
-    <ProfilePic :name="fullname" />
+    <ProfilePic :name="fullname" :isSize="'mid'" />
+    <p class="text-xl my-2 font-medium">{{ fullname }}</p>
     <div class="profile_container">
       <div class="">
         <form @submit.prevent="submit()">
@@ -114,7 +115,7 @@
               </span>
             </div>
           </div>
-          <div class="input_box">
+          <!-- <div class="input_box">
             <label class="input_label">Password</label>
             <input
               :class="{ invalid_input: v$.form.password.$errors.length }"
@@ -139,7 +140,7 @@
                 <p>{{ error.$message }}</p>
               </span>
             </div>
-          </div>
+          </div> -->
           <WideBtn :isSpin="isSpin">Update</WideBtn>
         </form>
       </div>

@@ -23,15 +23,15 @@ export default {
       size: computed(() => {
         switch (props.isSize) {
           case "small":
-            return "h-12 w-12";
+            return "h-12 w-12 ";
           case "mid":
-            return "h-24 w-24";
+            return "h-24 w-24 text-xl";
 
           case "big":
-            return "h-32 h-32";
+            return "h-32 h-32 text-2xl";
 
           default:
-            return "h-12 h-32";
+            return "h-12 h-12";
         }
       }),
     };
