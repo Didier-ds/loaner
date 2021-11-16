@@ -6,7 +6,7 @@
     <div class="my-2">
       <ul class="">
         <li
-          @click="$router.push({ name: 'Profile' })"
+          @click="push('Profile')"
           class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium"
         >
           Profile
@@ -30,6 +30,10 @@ export default {
   methods: {
     close() {
       this.$emit("toggleModal");
+    },
+    push(any) {
+      this.close();
+      this.$router.push({ name: any });
     },
   },
 };
