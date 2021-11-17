@@ -62,6 +62,7 @@ export default {
       errMessage: "",
       isSpin: false,
       token: "",
+      paymentDetails: null,
     };
   },
   methods: {
@@ -70,6 +71,29 @@ export default {
     },
     update() {
       this.amt = this.formatCurrency(this.amt);
+    },
+    makePaymentCallback(response) {
+      console.log("Payment callback", response);
+      if (response.status === "successful") {
+        const data = {
+          tx_ref: this.paymentDetails.tx_ref,
+          amount: this.paymentDetails.amount,
+          wallet: this.paymentDetails.meta.consumer_mac,
+        };
+        assets
+          .completeFunding(data, this.token)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      // Close modal in payment callback
+      this.closePaymentModal();
+    },
+    closePaymentCallback() {
+      console.log("payment modal is closed");
     },
     async fund() {
       this.isSpin = true;
@@ -83,8 +107,9 @@ export default {
                 console.log(res.data.data.payment_body);
 
                 this.token = res.data.data.token;
+                this.paymentDetails = res.data.data.payment_body;
                 this.asyncPayWithFlutterwave(res.data.data.payment_body).then((response) => {
-                  console.log(response);
+                  this.makePaymentCallback(response);
                 });
               })
               .catch((err) => {

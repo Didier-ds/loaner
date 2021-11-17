@@ -8,4 +8,9 @@ export default {
   fundWallet(data) {
     return apiClient().post("/fund-wallet", data, { headers: authHeader() });
   },
+  completeFunding(data, token) {
+    return apiClient().patch("/complete-funding", data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
 };
