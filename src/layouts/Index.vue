@@ -2,6 +2,7 @@
   <el-scrollbar height="100vh">
     <div id="main-page" class="mx-auto pt-4">
       <Header />
+
       <div class="page_container">
         <div v-show="$route.name != 'Overview'" class="inline-block">
           <GoBack />
@@ -16,10 +17,12 @@
 </template>
 <script>
 import Header from "./Header.vue";
+
 import GoBack from "@/components/reusables_/GoBack.vue";
 
 export default {
   name: "Dashboard",
+
   components: {
     Header,
     GoBack,

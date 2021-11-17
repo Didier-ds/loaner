@@ -7,7 +7,7 @@
     </div>
     <div class="stocks_list clear-right">
       <p class="p-2 font-bold">Transactions:</p>
-      <LoanCard v-for="index in 4" :key="index" :index="index" />
+      <LoanCard v-for="index in 12" :key="index" :index="index" />
     </div>
 
     <LoanFormModal @toggleModal="toggleModal" v-if="isRequest" />

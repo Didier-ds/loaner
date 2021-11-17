@@ -4462,6 +4462,11 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
+flutterwave-vue-v3@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/flutterwave-vue-v3/-/flutterwave-vue-v3-1.0.5.tgz#2ebc2093cad01fe95245a5440282a03a533621ae"
+  integrity sha512-etYKOWRdZPXJAVAk3karFNfGl0MPzmg4917ZNU3BlSV82sMxsXqsu0L9D4SwPFehrsP+BPCYtnxuHaMRJAQOBQ==
+
 follow-redirects@^1.0.0, follow-redirects@^1.14.4:
   version "1.14.5"
   resolved "https://registry.npmmirror.com/follow-redirects/download/follow-redirects-1.14.5.tgz?cache=0&sync_timestamp=1635857937985&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.14.5.tgz#f09a5848981d3c772b5392309778523f8d85c381"

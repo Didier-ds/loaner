@@ -29,7 +29,10 @@
         </div>
       </div>
       <transition name="fade">
-        <MenuDropDown @toggleModal="toggleModal" v-if="isRequest" />
+        <FundWalletForm @toggleForm="toggleForm" v-if="isRequest" />
+      </transition>
+      <transition name="fade">
+        <MenuDropDown @toggleForm="toggleForm" @toggleModal="toggleModal" v-if="isDrop" />
       </transition>
     </div>
   </div>
@@ -37,25 +40,32 @@
 <script>
 import { ref } from "vue";
 // import { useStore } from "vuex";
-
+import FundWalletForm from "@/components/reusables_/FundWalletForm.vue";
 import MenuDropDown from "@/components/reusables_/MenuDropdown.vue";
 
 export default {
   name: "Header",
   setup() {
     const isRequest = ref(false);
+    const isDrop = ref(false);
     const toggleModal = () => {
+      isDrop.value = !isDrop.value;
+    };
+    const toggleForm = () => {
       isRequest.value = !isRequest.value;
     };
     return {
       // fullname: computed(() => store.getters["auth/fullname"]),
+      isDrop,
       isRequest,
       toggleModal,
+      toggleForm,
     };
   },
 
   components: {
     MenuDropDown,
+    FundWalletForm,
   },
 };
 </script>

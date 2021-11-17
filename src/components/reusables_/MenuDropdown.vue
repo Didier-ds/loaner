@@ -6,13 +6,18 @@
     <div class="my-2">
       <ul class="">
         <li
+          @click="toggleForm(true)"
+          class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium"
+        >
+          Fund My Wallet
+        </li>
+        <li
           @click="push('Profile')"
           class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium"
         >
           Profile
         </li>
-      </ul>
-      <ul class="">
+
         <li class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium">
           Logout
         </li>
@@ -30,6 +35,10 @@ export default {
   methods: {
     close() {
       this.$emit("toggleModal");
+    },
+    toggleForm(any) {
+      this.close();
+      this.$emit("toggleForm", any);
     },
     push(any) {
       this.close();

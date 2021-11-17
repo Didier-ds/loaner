@@ -3,6 +3,7 @@ import VueClickAway from "vue3-click-away";
 // import  from 'element-plus'
 import "element-plus/dist/index.css";
 import { ElNotification, ElementPlus, ElScrollbar } from "element-plus";
+import Flutterwave from "flutterwave-vue-v3";
 import mixins from "./mixins";
 // import fullname from './mixins/fullname';
 import App from "./App.vue";
@@ -28,6 +29,7 @@ app.directive("error", {
 });
 app
   .mixin(mixins)
+  .use(Flutterwave, { publicKey: "FLWPUBK_TEST-db5bc2dc21efad5023ae7b13aa04cd2e-X" })
   .use(ElementPlus)
   .use(ElScrollbar)
   .use(VueClickAway)
