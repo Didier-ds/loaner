@@ -1,11 +1,11 @@
 import auth from "@/services/auth";
-// import { user } from "@/utils";
+import { user } from "@/utils";
 
 export default {
   namespaced: true,
   state: {
     token: null,
-    user: null,
+    user: user(),
   },
   getters: {
     fullname(state) {
@@ -18,6 +18,12 @@ export default {
     portfolios(state) {
       if (state.user) {
         return state.user.portfolio;
+      }
+      return [];
+    },
+    walletBalance(state) {
+      if (state.user) {
+        return state.user.wallet.amount;
       }
       return [];
     },
@@ -56,6 +62,15 @@ export default {
           return Promise.resolve(res);
         },
         (error) => Promise.reject(error)
+      );
+    },
+    refresh({ commit }) {
+      return auth.refresh().then(
+        (res) => {
+          commit("SET_USER", res.data.data);
+          return Promise.resolve(res);
+        },
+        (err) => Promise.reject(err)
       );
     },
   },

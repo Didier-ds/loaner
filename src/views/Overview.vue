@@ -8,7 +8,7 @@
         </div>
         <div>
           <p class="title pl-2">Available Balance:</p>
-          <p class="value text-3xl font-bold text-center">${{ formatCurrency(0) }}</p>
+          <p class="value text-3xl font-bold text-center">${{ formatCurrency(balance) }}</p>
         </div>
       </div>
       <div class="little_card_box grid grid-cols-2 gap-4">
@@ -52,6 +52,7 @@ export default {
 
         return all.reduce((a, b) => +a.unit_price + +b.unit_price);
       }),
+      balance: computed(() => store.getters["auth/walletBalance"]),
     };
   },
   components: {

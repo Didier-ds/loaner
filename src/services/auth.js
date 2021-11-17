@@ -14,4 +14,7 @@ export default {
     // console.log(otp);
     return apiClient().post("/complete-login", data, { headers: authHeader() });
   },
+  refresh() {
+    return apiClient().get("/user/refresh", { headers: authHeader() });
+  },
 };

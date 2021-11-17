@@ -103,9 +103,19 @@ export default {
         };
         assets
           .completeFunding(data, this.token)
-          .then((res) => {
-            console.log(res);
-            this.isSuccess = true;
+          .then(() => {
+            this.$store
+              .dispatch("auth/refresh")
+              .then((resp) => {
+                console.log(resp);
+                this.$notify({
+                  title: "Wallet Funded",
+                  type: "success",
+                  message: "",
+                });
+                this.isSuccess = true;
+              })
+              .catch((err) => console.log(err));
           })
           .catch((err) => {
             console.log(err);
