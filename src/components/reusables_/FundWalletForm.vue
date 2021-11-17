@@ -81,12 +81,11 @@ export default {
               .then((res) => {
                 // this.close()
                 console.log(res.data.data.payment_body);
+
                 this.token = res.data.data.token;
-                //   this.asyncPayWithFlutterwave(this.paymentData).then(
-                //   (response) => {
-                //       console.log(response)
-                //   }
-                // )
+                this.asyncPayWithFlutterwave(res.data.data.payment_body).then((response) => {
+                  console.log(response);
+                });
               })
               .catch((err) => {
                 console.log(err);
