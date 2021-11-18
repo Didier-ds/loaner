@@ -21,6 +21,9 @@ export default {
       }
       return [];
     },
+    user(state) {
+      return state.user;
+    },
     walletBalance(state) {
       if (state.user) {
         return state.user.wallet.amount;

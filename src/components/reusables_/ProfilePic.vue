@@ -1,7 +1,16 @@
 <template>
   <div
     :class="size"
-    class="rounded-sm flex items-center justify-center bg-black-400 text-white font-medium"
+    class="
+      rounded-sm
+      flex
+      items-center
+      justify-center
+      uppercase
+      bg-black-400
+      text-white
+      font-medium
+    "
   >
     <span>{{ text }}</span>
   </div>
