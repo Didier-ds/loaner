@@ -10,7 +10,8 @@
               <label class="input_label">firstname</label>
               <input
                 class="form_input"
-                :placeholder="form.firstname"
+                v-model="form.firstname"
+                :placeholder="user.firstname"
                 type="firstname"
                 name="firstname"
               />
@@ -19,7 +20,8 @@
               <label class="input_label">lastname</label>
               <input
                 class="form_input"
-                :placeholder="form.lastname"
+                v-model="form.lastname"
+                :placeholder="user.lastname"
                 type="lastname"
                 name="lastname"
               />
@@ -27,11 +29,23 @@
           </div>
           <div class="input_box">
             <label class="input_label">Email</label>
-            <input class="form_input" :placeholder="form.email" type="email" name="email" />
+            <input
+              class="form_input"
+              :placeholder="user.email"
+              v-model="form.email"
+              type="email"
+              name="email"
+            />
           </div>
           <div class="input_box">
             <label class="input_label">Phone</label>
-            <input class="form_input" :placeholder="form.phone" type="phone" name="phone" />
+            <input
+              class="form_input"
+              v-model="form.phone"
+              :placeholder="user.phone"
+              type="phone"
+              name="phone"
+            />
           </div>
           <!-- <div class="input_box">
             <label class="input_label">Password</label>
@@ -77,7 +91,13 @@ export default {
   data() {
     return {
       isSpin: false,
-      form: this.user,
+      form: {
+        user: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+      },
       errMessage: "",
     };
   },
