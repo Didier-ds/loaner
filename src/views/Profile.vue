@@ -43,9 +43,31 @@
               class="form_input"
               v-model="form.phone"
               :placeholder="user.phone"
-              type="phone"
+              type="number"
               name="phone"
             />
+          </div>
+          <div class="flex flex-col sm:grid gap-4 grid-cols-2">
+            <div class="input_box">
+              <label class="input_label">account Number</label>
+              <input
+                class="form_input"
+                v-model="form.account_no"
+                :placeholder="user.account_no"
+                type="number"
+                name="account_number"
+              />
+            </div>
+            <div class="input_box">
+              <label class="input_label">bank Name</label>
+              <input
+                class="form_input"
+                v-model="form.bank_name"
+                :placeholder="user.bank_name"
+                type="text"
+                name="bank_name"
+              />
+            </div>
           </div>
           <!-- <div class="input_box">
             <label class="input_label">Password</label>
@@ -79,6 +101,7 @@
 import { computed } from "vue";
 // import {} from 'vuex'
 import { mapActions, useStore } from "vuex";
+import User from "../models/user";
 
 export default {
   name: "Profile",
@@ -91,13 +114,7 @@ export default {
   data() {
     return {
       isSpin: false,
-      form: {
-        user: "",
-        firstname: "",
-        lastname: "",
-        email: "",
-        phone: "",
-      },
+      form: new User("", "", "", "", "", ""),
       errMessage: "",
     };
   },
