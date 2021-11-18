@@ -124,26 +124,15 @@ export default {
       register: "auth/register",
     }),
     async submit() {
-      const result = await this.v$.$validate();
-      // console.log(result);
-      if (!result) {
-        // notify user form is invalid
-        return;
-      }
+     
       this.isSpin = true;
-      //   await new Promise((resolve) =>
-      //     setTimeout(() => {
-      //       resolve(
-      //         this.register(this.form)
-      //           .then(() => {
-      //             this.$router.push({ name: "EmailVerify" });
-      //           })
-      //           .catch((err) => {
-      //             this.errMessage = err.response.data.message;
-      //           })
-      //       );
-      //     }, 1000)
-      //   );
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            resolve(
+              console.log('me')
+            );
+          }, 2000)
+        );
 
       this.isSpin = false;
     },

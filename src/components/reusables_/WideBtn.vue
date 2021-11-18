@@ -1,5 +1,6 @@
 <template>
   <button
+    :disabled = "isSpin"
     class="
       button_box
       bg-black
