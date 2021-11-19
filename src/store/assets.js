@@ -26,5 +26,19 @@ export default {
         (error) => Promise.reject(error)
       );
     },
+    purchaseStock({dispatch}, data){
+      const id = this.state.auth.user.user_id
+        return assets.purchaseStock(data, id).then((res) => {
+          console.log(res)
+            dispatch('refresh')
+            return Promise.resolve(res);
+          },
+          (error) => {
+            console.log(error) 
+            return Promise.reject(error)
+          }
+        )
+    }
   },
+  modules: {}
 };

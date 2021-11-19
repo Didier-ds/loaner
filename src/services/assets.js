@@ -13,5 +13,7 @@ export default {
       headers: { Authorization: `Bearer ${token}` },
     });
   },
-  
+  purchaseStock(data, id){
+    return apiClient().post(`/buy-stock/${id}`, data, { headers: authHeader() })
+  }
 };

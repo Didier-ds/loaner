@@ -49,13 +49,13 @@
           <div>
             <p>Quantity:</p>
             <div class="flex items-center">
-              <button class="border p-2 rounded-full bg-black shadow h-8 w-8  flex justify-center items-center text-white font-light text-2xl">-</button>
-              <p class="px-2">5</p>
-              <button class="border p-2 rounded-full bg-black shadow h-8 w-8  flex justify-center items-center text-white font-light text-2xl">+</button>
+              <button @click="crement('-')" class="border p-2 rounded-full bg-black  h-8 w-8  flex justify-center items-center text-white font-light text-2xl">-</button>
+              <p class="px-3">{{quantity}}</p>
+              <button @click="crement('+')" class="border p-2 rounded-full bg-black  h-8 w-8  flex justify-center items-center text-white font-light text-2xl">+</button>
             </div>
           </div>
           <div>
-            <button class="border p-2 rounded px-6 hover:bg-black hover:text-white ">Buy</button>
+            <button @click="purchase()"  :disabled="disable" class="border flex p-1 rounded px-6 hover:shadow bg-black text-white items-center "><BtnSpinner v-if="isSpin" /><span class="px-2">Buy</span></button>
           </div>
         </div>
     </div>
@@ -63,19 +63,62 @@
   </div>
 </template>
 <script>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
+import {useStore} from 'vuex'
+import { ElNotification } from "element-plus";
+import BtnSpinner from './BtnSpinner.vue'
 
+// const Quantity = Symbol("jo")
 export default {
   name: "StockCard",
-  setup(){
+  setup(props){
     const isShow = ref(false)
+    const isSpin = ref(false)
+    const store = useStore()
+    const quantity = ref(0)
+    const data = { ...props.stock}
+    const crement = (sign) => {
+        if(sign === '+') {quantity.value += 1}
+        else { quantity.value = quantity.value <= 0 ? quantity.value = 0 : quantity.value -= 1 }
+     } 
     const toggleCollapse = () => {
       isShow.value = !isShow.value
     }
+    const purchase = async () => {
+      data.quantity = quantity.value
+      isSpin.value= true;
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve(
+            store.dispatch('assets/purchaseStock', data).then((res) => {
+              isSpin.value= false;
+        console.log(res)
+      }).catch((err) => {
+        isSpin.value= false; 
+        ElNotification({
+                  title: "contact admin",
+                  type: "error",
+                  message: "",
+                })
+        console.log(err)})
+          );
+        }, 1000)
+      );
+      isSpin.value= false;
+      
+    }
     return {
+      crement,
+      isSpin,
+      purchase,
+      quantity,
+      disable: computed(() => { if (quantity.value <= 0 || isSpin.value === true) { return true } return false  }),
       isShow,
       toggleCollapse
     }
+  },
+  components: {
+      BtnSpinner
   },
   props: ["stock", "index"],
 };
