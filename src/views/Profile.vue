@@ -125,11 +125,7 @@ export default {
           setTimeout(() => {
             resolve(
               
-              store.dispatch('auth/updateProfile', form).then((res) => {
-                console.log(res)
-              }).catch((err) => {
-                console.log(err)
-              })
+              store.dispatch('auth/updateProfile', form).then().catch()
             );
           }, 2000)
         );

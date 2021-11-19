@@ -20,7 +20,7 @@ export default {
       return assets.getAllMarketStocks().then(
         (res) => {
           commit("AddMarketStocks", res.data.data);
-          console.log(res);
+          // console.log(res);
           return Promise.resolve(res);
         },
         (error) => Promise.reject(error)
@@ -29,14 +29,14 @@ export default {
     purchaseStock({dispatch}, data){
       const id = this.state.auth.user.user_id
         return assets.purchaseStock(data, id).then((res) => {
-          console.log(res)
+          // console.log(res)
             dispatch('refresh')
             return Promise.resolve(res);
           },
-          (error) => {
-            console.log(error) 
-            return Promise.reject(error)
-          }
+          (error) => 
+            // console.log(error) 
+             Promise.reject(error)
+          
         )
     }
   },

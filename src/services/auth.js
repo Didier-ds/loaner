@@ -19,7 +19,7 @@ export default {
     return apiClient().get("/user/refresh", { headers: authHeader() });
   },
    updateProfile(data, id){
-     console.log(id)
+    //  console.log(id)
      return apiClient().patch(`/update-profile/${id}`, data, { headers: authHeader() })
    }
 };

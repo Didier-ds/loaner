@@ -84,7 +84,7 @@ export default {
     });
     const { first, second, third, fourth, fifth, sixth } = toRefs(inputs);
     const next = (from, to) => {
-      console.log(inputs[from].value);
+      // console.log(inputs[from].value);
       if (inputs[from].value.length) {
         inputs[to].focus();
       }

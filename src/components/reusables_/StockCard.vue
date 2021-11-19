@@ -100,14 +100,14 @@ export default {
                 })
               })
         // console.log(res)
-      }).catch((err) => {
+      }).catch(() => {
         isSpin.value= false; 
         ElNotification({
                   title: "contact admin",
                   type: "error",
                   message: "",
                 })
-        console.log(err)})
+        })
           );
         }, 1000)
       );
