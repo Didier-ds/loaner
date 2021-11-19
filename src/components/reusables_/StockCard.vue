@@ -90,9 +90,16 @@ export default {
       await new Promise((resolve) =>
         setTimeout(() => {
           resolve(
-            store.dispatch('assets/purchaseStock', data).then((res) => {
+            store.dispatch('assets/purchaseStock', data).then(() => {
               isSpin.value= false;
-        console.log(res)
+              store.dispatch("auth/refresh").then(() => {
+                ElNotification({
+                  title: "stock purchased",
+                  type: "success",
+                  message: "",
+                })
+              })
+        // console.log(res)
       }).catch((err) => {
         isSpin.value= false; 
         ElNotification({
