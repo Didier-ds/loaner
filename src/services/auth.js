@@ -17,4 +17,7 @@ export default {
   refresh() {
     return apiClient().get("/user/refresh", { headers: authHeader() });
   },
+  // update(){
+  //   return apiClient().patch('/update-profile/${user_id}')
+  // }
 };

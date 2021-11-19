@@ -13,7 +13,9 @@ import ProfilePic from "@/components/reusables_/ProfilePic.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import refresh from '@/services/refresh'
 
+refresh()
 require("@/store/subscriber");
 
 const app = createApp(App);
