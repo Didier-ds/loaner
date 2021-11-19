@@ -129,7 +129,7 @@ export default {
         await new Promise((resolve) =>
           setTimeout(() => {
             resolve(
-              console.log('me')
+              console.log('meo')
             );
           }, 2000)
         );
