@@ -18,7 +18,7 @@
         p-2
         px-4
       "
-    >
+      >
       <span class="absolute top-0 right-0 px-2">{{ stock.percentage_change }}</span>
       <div class="stock_name_container my-2 flex-grow flex items-center">
         <div class="border p-2 w-12 rounded-3xl">
@@ -43,6 +43,17 @@
           <p class="ibm font-bold">${{ stock.unit_price }}</p>
         </div>
       </div>
+    </div>
+    <div>
+        <div>
+          <div>
+            <p>Quantity:</p>
+            <div>
+              <button></button>
+              <button></button>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </template>

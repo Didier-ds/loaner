@@ -1,4 +1,4 @@
-import auth from "@/services/auth";
+import auth from "@/services/auth"; 
 import { user } from "@/utils";
 
 export default {
@@ -23,6 +23,9 @@ export default {
     },
     user(state) {
       return state.user;
+    },
+    userId(state) {
+      return state.user.user_id;
     },
     walletBalance(state) {
       if (state.user) {
@@ -66,6 +69,10 @@ export default {
         },
         (error) => Promise.reject(error)
       );
+    },
+    updateProfile({state}, data){
+      const id = state.user.user_id
+      return auth.updateProfile(data, id).then(res =>  Promise.resolve(res)).catch(err =>  Promise.reject(err))
     },
     refresh({ commit }) {
       return auth.refresh().then(
