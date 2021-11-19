@@ -51,7 +51,7 @@ export default {
 .menudropdown {
   max-width: 200px;
   position: absolute;
-  bottom: -155px;
+  top: 55px;
   right: 0;
   z-index: 2;
 }
