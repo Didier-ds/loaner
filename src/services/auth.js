@@ -2,6 +2,7 @@
 import authHeader from "./auth_header";
 import apiClient from "./apiClient";
 
+
 export default {
   login(data) {
     return apiClient().post("/login", data);
@@ -17,4 +18,8 @@ export default {
   refresh() {
     return apiClient().get("/user/refresh", { headers: authHeader() });
   },
+   updateProfile(data, id){
+     console.log(id)
+     return apiClient().patch(`/update-profile/${id}`, data, { headers: authHeader() })
+   }
 };

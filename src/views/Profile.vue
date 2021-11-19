@@ -98,44 +98,63 @@
   </div>
 </template>
 <script>
-import { computed } from "vue";
+import { computed, ref, reactive } from "vue";
 // import {} from 'vuex'
-import { mapActions, useStore } from "vuex";
+import { useStore } from "vuex";
 import User from "../models/user";
+
+
 
 export default {
   name: "Profile",
   setup() {
-    const store = useStore();
+    const isSpin = ref(false)
+    const errMessage = ref('')
+    const store = useStore()
+    const id = computed(() => store.getters['auth/userId'])
+    const form = reactive(new User("", "", "", "", "", ""))
+    
     return {
-      user: computed(() => store.getters["auth/user"]),
-    };
-  },
-  data() {
-    return {
-      isSpin: false,
-      form: new User("", "", "", "", "", ""),
-      errMessage: "",
-    };
-  },
-
-  methods: {
-    ...mapActions({
-      register: "auth/register",
-    }),
-    async submit() {
-     
-      this.isSpin = true;
+      id,
+      form,
+      isSpin,
+      submit: async () => {
+       isSpin.value = true;
+       
         await new Promise((resolve) =>
           setTimeout(() => {
             resolve(
-              console.log('meo')
+              
+              store.dispatch('auth/updateProfile', form).then((res) => {
+                console.log(res)
+              }).catch((err) => {
+                console.log(err)
+              })
             );
           }, 2000)
         );
 
-      this.isSpin = false;
+      isSpin.value = false;
     },
+      errMessage,
+      user: computed(() => store.getters["auth/user"]),
+    };
+  },
+  methods: {
+    
+    // async submit() {
+     
+    //   this.isSpin = true;
+    //     await new Promise((resolve) =>
+    //       setTimeout(() => {
+    //         resolve(
+    //           // const id = store.getters['auth/userId']
+    //         );
+    //       }, 2000)
+    //     );
+
+    //   this.isSpin = false;
+    // },
   },
 };
 </script>

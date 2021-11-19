@@ -1,32 +1,31 @@
 <template>
-  <div>
+  <div id="stockcard" :style="{ '--order': index }" class="p-2 select-none px-4 border mb-4 rounded">
     <div
-      :style="{ '--order': index }"
-      id="stockcard"
+      @click="toggleCollapse"
+      
       class="
         flex
         w-full
-        mb-4
+        
         flex-col
         items-start
         sm:flex-row
         justify-between
         sm:items-center
-        border
+        
         relative
-        rounded
-        p-2
-        px-4
+        
+        
       "
-    >
-      <span class="absolute top-0 right-0 px-2">{{ stock.percentage_change }}</span>
+      >
+      <!-- <span class="absolute top-0 right-0 px-2">{{ stock.percentage_change }}</span> -->
       <div class="stock_name_container my-2 flex-grow flex items-center">
         <div class="border p-2 w-12 rounded-3xl">
           <img :src="stock.image_url" class="w-full" />
         </div>
         <div class="mx-4 flex-grow">
           <p class="stock_abbr font-bold">{{ stock.symbol }}</p>
-          <p class="stock_fullname text-gray-500">Awenemen</p>
+          <span class="px-2 text-xs text-green-600 font-medium">{{ stock.percentage_change }}</span>
         </div>
       </div>
       <div class="stock_details border-t sm:border-0 py-2 w-full my-2 grid grid-cols-3 gap-10">
@@ -40,22 +39,51 @@
         </div>
         <div class="text-center">
           <p class="font-medium text-gray-500 text-xs">Equity Value</p>
-          <p class="ibm font-bold">${{ stock.unit_price }}</p>
+          <p class="ibm font-bold break-words">${{ stock.unit_price }}</p>
         </div>
       </div>
     </div>
+     <transition name="fade">
+    <div v-show="isShow">
+        <div class="flex justify-between items-center">
+          <div>
+            <p>Quantity:</p>
+            <div class="flex items-center">
+              <button class="border p-2 rounded-full bg-black shadow h-8 w-8  flex justify-center items-center text-white font-light text-2xl">-</button>
+              <p class="px-2">5</p>
+              <button class="border p-2 rounded-full bg-black shadow h-8 w-8  flex justify-center items-center text-white font-light text-2xl">+</button>
+            </div>
+          </div>
+          <div>
+            <button class="border p-2 rounded px-6 hover:bg-black hover:text-white ">Buy</button>
+          </div>
+        </div>
+    </div>
+    </transition>
   </div>
 </template>
 <script>
+import {ref} from 'vue'
+
 export default {
   name: "StockCard",
+  setup(){
+    const isShow = ref(false)
+    const toggleCollapse = () => {
+      isShow.value = !isShow.value
+    }
+    return {
+      isShow,
+      toggleCollapse
+    }
+  },
   props: ["stock", "index"],
 };
 </script>
 <style lang="scss" scoped>
 #stockcard {
   box-shadow: 0px 0px 10px rgba(12, 24, 37, 0.05);
-
+  transition: .35s ease-in-out;
   animation-name: fadeUpOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
