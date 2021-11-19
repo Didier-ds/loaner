@@ -31,7 +31,7 @@ app.directive("error", {
 });
 app
   .mixin(mixins)
-  .use(Flutterwave, { publicKey: "FLWPUBK_TEST-db5bc2dc21efad5023ae7b13aa04cd2e-X" })
+  .use(Flutterwave, { publicKey: "FLWPUBK_TEST-21bb1d0b74fa71af51ec922925248216-X" })
   .use(ElementPlus)
   .use(ElScrollbar)
   .use(VueClickAway)
