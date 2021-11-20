@@ -94,7 +94,7 @@ export default {
       this.amt = this.formatCurrency(this.amt);
     },
     makePaymentCallback(response) {
-      console.log("Payment callback", response);
+      // console.log("Payment callback", response);
       if (response.status === "successful") {
         const data = {
           tx_ref: this.paymentDetails.tx_ref,
@@ -106,8 +106,8 @@ export default {
           .then(() => {
             this.$store
               .dispatch("auth/refresh")
-              .then((resp) => {
-                console.log(resp);
+              .then(() => {
+                // console.log(resp);
                 this.$notify({
                   title: "Wallet Funded",
                   type: "success",
@@ -115,17 +115,15 @@ export default {
                 });
                 this.isSuccess = true;
               })
-              .catch((err) => console.log(err));
+              .catch();
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch();
       }
       // Close modal in payment callback
       this.closePaymentModal();
     },
     closePaymentCallback() {
-      console.log("payment modal is closed");
+      // console.log("payment modal is closed");
     },
     async fund() {
       this.isSpin = true;
@@ -136,7 +134,7 @@ export default {
               .fundWallet(this.data)
               .then((res) => {
                 // this.close()
-                console.log(res.data.data.payment_body);
+                // console.log(res.data.data.payment_body);
 
                 this.token = res.data.data.token;
                 this.paymentDetails = res.data.data.payment_body;
@@ -145,7 +143,7 @@ export default {
                 });
               })
               .catch((err) => {
-                console.log(err);
+                // console.log(err);
                 this.errMessage = err.response.data.message;
               })
           );

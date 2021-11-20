@@ -43,7 +43,7 @@
               class="form_input"
               v-model="form.phone"
               :placeholder="user.phone"
-              type="number"
+              type="tel"
               name="phone"
             />
           </div>
@@ -54,7 +54,7 @@
                 class="form_input"
                 v-model="form.account_no"
                 :placeholder="user.account_no"
-                type="number"
+                type="tel"
                 name="account_number"
               />
             </div>
@@ -101,6 +101,7 @@
 import { computed, ref, reactive } from "vue";
 // import {} from 'vuex'
 import { useStore } from "vuex";
+import { ElNotification } from "element-plus";
 import User from "../models/user";
 
 
@@ -124,17 +125,23 @@ export default {
         await new Promise((resolve) =>
           setTimeout(() => {
             resolve(
-              
-              store.dispatch('auth/updateProfile', form).then((res) => {
-                console.log(res)
-              }).catch((err) => {
-                console.log(err)
+              store.dispatch('auth/updateProfile', form).then(() => {
+                isSpin.value= false;
+                store.dispatch("auth/refresh").then(() => {
+                  ElNotification({
+                    title: "Profile Updated",
+                    type: "success",
+                    message: "",
+                  })
+                })
+              }).catch(() => {
+                  isSpin.value = false;
               })
             );
           }, 2000)
         );
 
-      isSpin.value = false;
+      
     },
       errMessage,
       user: computed(() => store.getters["auth/user"]),
