@@ -85,7 +85,7 @@ export default {
       isShow.value = !isShow.value
     }
     const purchase = async () => {
-      data.quantity = quantity.value
+      data.quantity = quantity.value.toString()
       isSpin.value= true;
       await new Promise((resolve) =>
         setTimeout(() => {
@@ -100,10 +100,10 @@ export default {
                 })
               })
         // console.log(res)
-      }).catch(() => {
+      }).catch((err) => {
         isSpin.value= false; 
         ElNotification({
-                  title: "contact admin",
+                  title: err.response.data.message,
                   type: "error",
                   message: "",
                 })
