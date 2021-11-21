@@ -74,9 +74,12 @@
         <p class="font-medium">Amount</p>
         <input type="text" class="border p-2 rounded w-full outline-none" />
       </div>
-       <div class="my-4">
+       <div class="my-4 relative">
         <p class="font-medium">Period</p>
         <div class="border p-2 rounded w-full  outline-none" >Choose Your Package</div>
+      <div class="border h-32 bg-white my-2 w-full absolute overflow-y-scroll rounded p-2">
+         <p v-for="(list, index) in packages" class="p-2 hover:bg-gray-600 rounded select-none hover:cursor-default hover:text-white font-medium" :key="index">{{list.name}}</p> 
+      </div>
       </div>
       <div>
         <p class="font-medium">Payment Plan:</p>
@@ -89,8 +92,22 @@
   </div>
 </template>
 <script>
+import {reactive} from 'vue'
+import packages from '@/utils/packages'
+
 export default {
   name: "LoanFormModal",
+  setup(){
+    const selectedMonth = reactive({
+      name: 'Choose Your Package',
+      value: 0
+    })
+   
+    return {
+      packages,
+      selectedMonth
+    }
+  },
   methods: {
     close() {
       this.$emit("toggleModal");
