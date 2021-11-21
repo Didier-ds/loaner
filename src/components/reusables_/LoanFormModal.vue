@@ -18,8 +18,8 @@
           />
         </svg>
       </div>
-      <p>Choose Package</p>
-      <div class="flex overflow-x-auto">
+      <p>Request A Loan</p>
+      <!-- <div class="flex overflow-x-auto">
         <div
           :class="'active'"
           class="
@@ -69,10 +69,14 @@
           <p class="font-medium text-lg">2% Interest Rate</p>
           <p>6 Months</p>
         </div>
-      </div>
+      </div> -->
       <div class="my-4">
         <p class="font-medium">Amount</p>
         <input type="text" class="border p-2 rounded w-full outline-none" />
+      </div>
+       <div class="my-4">
+        <p class="font-medium">Period</p>
+        <div class="border p-2 rounded w-full  outline-none" >Choose Your Package</div>
       </div>
       <div>
         <p class="font-medium">Payment Plan:</p>

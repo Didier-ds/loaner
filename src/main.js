@@ -13,9 +13,9 @@ import ProfilePic from "@/components/reusables_/ProfilePic.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import refresh from '@/services/refresh'
+// import refresh from '@/services/refresh'
 
-refresh()
+// refresh()
 require("@/store/subscriber");
 
 const app = createApp(App);
