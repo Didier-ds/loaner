@@ -7,7 +7,7 @@ export const validName = (name) => {
   }
   return false;
 };
-
+export const GetPaymentSchedule = (amt, mnt, rate) => (amt*(1 + 0.01*rate)/mnt).toFixed(2)
 // export const focusNextInput = (from, to) => {
 //   // const d = document.body.getElementById(from)
 //   // const first = ref(null)
