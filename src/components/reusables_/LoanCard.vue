@@ -22,21 +22,21 @@
       <div class="stock_name_container my-2 w-full grid grid-cols-2 gap-10">
         <div class="text-center">
           <p class="stock_abbr text-gray-500 font-medium">Date</p>
-          <p class="stock_fullname text-gray-600">2021-01-21</p>
+          <p class="stock_fullname text-gray-600">{{loan.created_at.slice(0, 10)}}</p>
         </div>
         <div class="text-center">
-          <p class="font-medium text-gray-500">Amount</p>
-          <p class="font-medium">N{{ formatCurrency(3000) }}</p>
+          <p class="font-medium text-gray-500">Duration</p>
+          <p class="font-medium">{{loan.duration}}</p>
         </div>
       </div>
       <div class="stock_details py-2 w-full my-2 grid grid-cols-2 gap-10">
         <div class="text-center">
-          <p class="font-medium text-gray-500">Balance</p>
-          <p class="font-medium">N{{ formatCurrency(80000) }}</p>
+          <p class="font-medium text-gray-500">status</p>
+          <p class="font-medium">{{ loan.status }}</p>
         </div>
         <div class="text-center">
           <p class="font-medium text-gray-500">Paid</p>
-          <p class="ibm font-bold text-green-600">${{ formatCurrency(2000) }}</p>
+          <p class="ibm font-bold text-green-600">${{ formatCurrency(loan.paid) }}</p>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
 <script>
 export default {
   name: "StockCard",
-  props: ["index"],
+  props: ["index", "loan"],
 };
 </script>
 <style lang="scss" scoped>

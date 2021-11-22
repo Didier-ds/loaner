@@ -103,7 +103,7 @@
 <script>
 import {ref, computed} from 'vue'
 import {useStore} from 'vuex'
-import { ElNotification } from "element-plus";
+import { ElNotification, ElMessage } from "element-plus";
 import packages from '@/utils/packages'
 import PackageDropdown from './PackageDropdown.vue'
 import {GetPaymentSchedule} from '@/utils/'
@@ -146,7 +146,9 @@ export default {
         setTimeout(() => {
           resolve(
             store.dispatch('assets/requestLoan', data).then(() => {
-              store.dispatch('auth/refresh').then(() => {
+              store.dispatch('assets/getAllLoans').then(() => {
+                store.dispatch('auth/refresh').then(() => {
+                  close()
                 ElNotification({
                   title: "Loan Requested",
                   type: "success",
@@ -155,20 +157,24 @@ export default {
                 isSpin.value = false;
                 close()
               }).catch((err) => {
-                ElNotification({
-                  title: err.response.data.message,
-                  type: "success",
-                  message: "",
+                ElMessage({
+                  showClose: true,
+                  message: err.response.data.message,
+                  type: "warning",
+                  duration: 5000
                 });
+              })
                 isSpin.value = false;
                 // close()
               })
             }).catch((err) => {
               isSpin.value = false;
-              ElNotification({
-                  title: err.response.data.message,
-                  type: "success",
-                  message: "",
+              ElMessage({
+                showClose: true,
+                  message: err.response.data.message,
+                  type: "warning",
+                  duration: 5000
+                  
                 });
                 // close()
             })

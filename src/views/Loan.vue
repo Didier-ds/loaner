@@ -11,7 +11,7 @@
         <Empty>You have no loans</Empty>
       </template>
       <template v-else>
-        <LoanCard v-for="index in loans" :key="index" :index="index" />
+        <LoanCard v-for="(loan, index) in loans" :loan = "loan" :key="index" :index="index" />
       </template>
       
     </div>
@@ -25,6 +25,8 @@ import {useStore} from 'vuex';
 import LoanCard from "@/components/reusables_/LoanCard.vue";
 import LoanFormModal from "@/components/reusables_/LoanFormModal.vue";
 
+// getAllLoans()
+
 export default {
   name: "Loan",
   setup() {
@@ -33,7 +35,12 @@ export default {
     const toggleModal = () => {
       isRequest.value = !isRequest.value;
     };
+    const  getAllLoans = () => {
+      store.dispatch('assets/getAllLoans')
+    }
+    getAllLoans()
     return {
+      getAllLoans,
       loans: computed(() => store.getters['assets/loans']),
       isRequest,
       toggleModal,
