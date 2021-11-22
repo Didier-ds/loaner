@@ -60,7 +60,7 @@ export default {
       // const id = this.state.auth.user.user_id
         return assets.requestLoan(data).then((res) => {
           // console.log(res)
-            dispatch('refresh')
+            dispatch('auth/refresh')
             return Promise.resolve(res);
           },
           (error) => 

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="relative">
+    <Status :type="loan.status" />
     <div
       :style="{ '--order': index }"
       id="stockcard"
@@ -15,6 +16,7 @@
         border
         my-2
         mb-4
+        
         px-4
         cursor-pointer
       "
@@ -26,13 +28,14 @@
         </div>
         <div class="text-center">
           <p class="font-medium text-gray-500">Duration</p>
-          <p class="font-medium">{{loan.duration}}</p>
+          <p class="font-medium">{{loan.duration}} Months</p>
         </div>
       </div>
       <div class="stock_details py-2 w-full my-2 grid grid-cols-2 gap-10">
         <div class="text-center">
-          <p class="font-medium text-gray-500">status</p>
-          <p class="font-medium">{{ loan.status }}</p>
+          <p class="font-medium text-gray-500">Amount</p>
+          <p class="ibm font-bold">{{formatCurrency(loan.amount)}} </p>
+          
         </div>
         <div class="text-center">
           <p class="font-medium text-gray-500">Paid</p>
@@ -43,9 +46,14 @@
   </div>
 </template>
 <script>
+import Status from './Status.vue'
+
 export default {
   name: "StockCard",
   props: ["index", "loan"],
+  components: {
+    Status
+  }
 };
 </script>
 <style lang="scss" scoped>

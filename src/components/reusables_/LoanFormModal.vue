@@ -147,7 +147,7 @@ export default {
           resolve(
             store.dispatch('assets/requestLoan', data).then(() => {
               store.dispatch('assets/getAllLoans').then(() => {
-                store.dispatch('auth/refresh').then(() => {
+                
                   close()
                 ElNotification({
                   title: "Loan Requested",
@@ -166,7 +166,7 @@ export default {
               })
                 isSpin.value = false;
                 // close()
-              })
+              
             }).catch((err) => {
               isSpin.value = false;
               ElMessage({
