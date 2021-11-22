@@ -74,17 +74,21 @@
         <p class="font-medium">Amount</p>
         <input type="text" class="border p-2 rounded w-full outline-none" />
       </div>
-       <div class="my-4 relative">
+      <div class="flex flex-col gap-6 sm:items-center my-4 sm:grid grid-cols-2">
+        <div class="w-full relative">
         <p class="font-medium">Period</p>
-        <div class="border p-2 rounded w-full  outline-none" >Choose Your Package</div>
-      <div class="border h-32 bg-white my-2 w-full absolute overflow-y-scroll rounded p-2">
-         <p v-for="(list, index) in packages" class="p-2 hover:bg-gray-600 rounded select-none hover:cursor-default hover:text-white font-medium" :key="index">{{list.name}}</p> 
-      </div>
+        <div class="border p-2 rounded w-full  outline-none" @click="toggleDropdown()">{{selectedMonth.name}}</div>
+        <transition name="fade">
+        <PackageDropdown v-if="isShow" :packages="packages" @selectPackage = "selectPackage" @closeForm = "closeForm" />
+        </transition>
       </div>
       <div>
         <p class="font-medium">Payment Plan:</p>
         <p class="ibm font-bold">${{ formatCurrency(25000) }}</p>
       </div>
+      </div>
+       
+      
       <div class="float-right">
         <button class="bg-black rounded text-white font-medium p-2 px-4">Request Loan</button>
       </div>
@@ -92,27 +96,47 @@
   </div>
 </template>
 <script>
-import {reactive} from 'vue'
+import {ref} from 'vue'
 import packages from '@/utils/packages'
+import PackageDropdown from './PackageDropdown.vue'
 
 export default {
   name: "LoanFormModal",
-  setup(){
-    const selectedMonth = reactive({
+  setup(props, context){
+    const selectedMonth = ref({
       name: 'Choose Your Package',
       value: 0
     })
-   
+    const isShow = ref(false);
+    function closeForm(any){
+      isShow.value = any
+    }
+    const toggleDropdown = () => {
+      isShow.value = !isShow.value
+    }
+   const selectPackage = (any) => {
+      selectedMonth.value = any
+      toggleDropdown()
+   }
+   function close() {
+      context.$emit("toggleModal");
+    }
     return {
+      toggleDropdown,
+      isShow,
+      close,
+      closeForm,
       packages,
-      selectedMonth
+      selectedMonth,
+      selectPackage
     }
   },
   methods: {
-    close() {
-      this.$emit("toggleModal");
-    },
+    
   },
+  components: {
+    PackageDropdown
+  }
 };
 </script>
 <style lang="scss">
