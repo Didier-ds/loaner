@@ -87,11 +87,14 @@
         <p class="ibm font-bold">${{ paymentSchedule }}</p>
       </div>
       </div>
-       
-      
       <div class="float-right">
         <button class="bg-black rounded text-white font-medium p-2 px-4">Request Loan</button>
-      </div>
+      </div><button
+            type="submit"
+            class="bg-black rounded mx-auto flex items-center px-4 py-2 text-white font-medium"
+          >
+            <BtnSpinner v-if="isSpin" /><span class="px-2">Proceed</span>
+          </button>
     </div>
   </div>
 </template>
@@ -100,6 +103,7 @@ import {ref, computed} from 'vue'
 import packages from '@/utils/packages'
 import PackageDropdown from './PackageDropdown.vue'
 import {GetPaymentSchedule} from '@/utils/'
+import BtnSpinner from "@/components/reusables_/BtnSpinner.vue";
 
 export default {
   name: "LoanFormModal",
@@ -114,6 +118,7 @@ export default {
     function closeForm(any){
       isShow.value = any
     }
+    const isSpin = ref(false)
     const toggleDropdown = () => {
       isShow.value = !isShow.value
     }
@@ -129,6 +134,7 @@ export default {
       amount,
       toggleDropdown,
       isShow,
+      isSpin,
       close,
       paymentSchedule: computed(() => {
         const {value, rate} = selectedMonth.value
@@ -145,6 +151,7 @@ export default {
     
   },
   components: {
+    BtnSpinner,
     PackageDropdown
   }
 };
