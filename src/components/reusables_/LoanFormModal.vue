@@ -72,7 +72,7 @@
       </div> -->
       <div class="my-4">
         <p class="font-medium">Amount</p>
-        <input type="text" class="border p-2 rounded w-full outline-none" />
+        <input type="text" class="border p-2 rounded w-full outline-none" v-model="amount"/>
       </div>
       <div class="flex flex-col gap-6 sm:items-center my-4 sm:grid grid-cols-2">
         <div class="w-full relative">
@@ -84,7 +84,7 @@
       </div>
       <div>
         <p class="font-medium">Payment Plan:</p>
-        <p class="ibm font-bold">${{ formatCurrency(25000) }}</p>
+        <p class="ibm font-bold">${{ paymentSchedule }}</p>
       </div>
       </div>
        
@@ -96,17 +96,20 @@
   </div>
 </template>
 <script>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 import packages from '@/utils/packages'
 import PackageDropdown from './PackageDropdown.vue'
+import {GetPaymentSchedule} from '@/utils/'
 
 export default {
   name: "LoanFormModal",
   setup(props, context){
     const selectedMonth = ref({
       name: 'Choose Your Package',
-      value: 0
+      value: 1,
+      rate: 1
     })
+    const amount = ref(0)
     const isShow = ref(false);
     function closeForm(any){
       isShow.value = any
@@ -116,15 +119,22 @@ export default {
     }
    const selectPackage = (any) => {
       selectedMonth.value = any
+      
       toggleDropdown()
    }
    function close() {
-      context.$emit("toggleModal");
+      context.emit("toggleModal");
     }
     return {
+      amount,
       toggleDropdown,
       isShow,
       close,
+      paymentSchedule: computed(() => {
+        const {value, rate} = selectedMonth.value
+        if (value <= 1) return 0
+        return GetPaymentSchedule(amount.value, value, rate)
+      }),
       closeForm,
       packages,
       selectedMonth,
