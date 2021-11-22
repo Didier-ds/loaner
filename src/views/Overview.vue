@@ -4,7 +4,7 @@
       <div class="portfolio_card relative p-2 flex flex-col justify-between">
         <div>
           <p class="title pl-2">Portfolio Value:</p>
-          <p class="value text-3xl font-bold text-center">${{ total }}</p>
+          <p class="value text-3xl font-bold text-center">${{ formatCurrency(total) }}</p>
         </div>
         <div>
           <p class="title pl-2">Wallet Balance:</p>
@@ -51,7 +51,7 @@ export default {
         // function getSum(total, num){
         //   return total + +num
         // } 
-        return all.reduce((a, b) => a + +b.unit_price, 0);
+        return all.reduce((a, b) => a + +b.equity_value, 0);
       }),
       balance: computed(() => store.getters["auth/walletBalance"]),
     };

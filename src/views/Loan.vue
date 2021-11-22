@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="text-center my-2">
+      <p class="font-medium">Wallet Balance</p>
+      <p class="text-3xl font-extrabold ibm">${{formatCurrency(balance)}}</p>
+    </div>
     <div class="float-right">
       <button @click="toggleModal" class="flex items-center p-2 border inline-block rounded">
         <img src="@/assets/img/add_btn.png" class="w-10" /><span class="px-2">Request Loan</span>
@@ -41,6 +45,7 @@ export default {
     getAllLoans()
     return {
       getAllLoans,
+      balance: computed(() => store.getters["auth/walletBalance"]),
       loans: computed(() => store.getters['assets/loans']),
       isRequest,
       toggleModal,
