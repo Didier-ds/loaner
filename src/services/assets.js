@@ -15,5 +15,11 @@ export default {
   },
   purchaseStock(data, id){
     return apiClient().post(`/buy-stock/${id}`, data, { headers: authHeader() })
+  },
+  getAllLoans(){
+    return apiClient().get('/loans', { headers: authHeader() })
+  },
+  requestLoan(data){
+    return apiClient().post(`/loan/request`, data, { headers: authHeader() })
   }
 };

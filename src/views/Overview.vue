@@ -19,7 +19,7 @@
     <div class="stocks_list">
       <p class="p-2 font-bold">Portfolio Activities:</p>
       <template v-if="portfolios.length <= 0">
-        <Empty />
+        <Empty >You have no portfolio</Empty>
       </template>
       <template v-else>
         <UserStockCard

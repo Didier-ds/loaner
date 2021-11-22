@@ -88,22 +88,27 @@
       </div>
       </div>
       <div class="float-right">
-        <button class="bg-black rounded text-white font-medium p-2 px-4">Request Loan</button>
-      </div><button
+        <button
+            @click = submit()
             type="submit"
             class="bg-black rounded mx-auto flex items-center px-4 py-2 text-white font-medium"
           >
-            <BtnSpinner v-if="isSpin" /><span class="px-2">Proceed</span>
+            <BtnSpinner v-if="isSpin" /><span class="px-2">Request Loan</span>
           </button>
+        <!-- <button class="bg-black rounded text-white font-medium p-2 px-4">Request Loan</button> -->
+      </div>
     </div>
   </div>
 </template>
 <script>
 import {ref, computed} from 'vue'
+import {useStore} from 'vuex'
+import { ElNotification } from "element-plus";
 import packages from '@/utils/packages'
 import PackageDropdown from './PackageDropdown.vue'
 import {GetPaymentSchedule} from '@/utils/'
 import BtnSpinner from "@/components/reusables_/BtnSpinner.vue";
+// import assets from '@/services/assets'
 
 export default {
   name: "LoanFormModal",
@@ -113,6 +118,7 @@ export default {
       value: 1,
       rate: 1
     })
+    const store = useStore()
     const amount = ref(0)
     const isShow = ref(false);
     function closeForm(any){
@@ -130,7 +136,49 @@ export default {
    function close() {
       context.emit("toggleModal");
     }
+    const submit = async () => {
+      isSpin.value = true;
+      const data = {
+        amount: +amount.value,
+        duration: selectedMonth.value.value
+      }
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve(
+            store.dispatch('assets/requestLoan', data).then(() => {
+              store.dispatch('auth/refresh').then(() => {
+                ElNotification({
+                  title: "Loan Requested",
+                  type: "success",
+                  message: "",
+                });
+                isSpin.value = false;
+                close()
+              }).catch((err) => {
+                ElNotification({
+                  title: err.response.data.message,
+                  type: "success",
+                  message: "",
+                });
+                isSpin.value = false;
+                // close()
+              })
+            }).catch((err) => {
+              isSpin.value = false;
+              ElNotification({
+                  title: err.response.data.message,
+                  type: "success",
+                  message: "",
+                });
+                // close()
+            })
+          );
+        }, 1000)
+      );
+      isSpin.value = false;
+    }
     return {
+      submit,
       amount,
       toggleDropdown,
       isShow,

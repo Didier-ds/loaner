@@ -9,18 +9,20 @@ import mixins from "./mixins";
 import App from "./App.vue";
 import "nprogress/nprogress.css";
 import WideBtn from "@/components/reusables_/WideBtn.vue";
+import Empty from "@/components/reusables_/Empty.vue";
 import ProfilePic from "@/components/reusables_/ProfilePic.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-// import refresh from '@/services/refresh'
+ import refresh from '@/services/refresh'
 
-// refresh()
+ refresh()
 require("@/store/subscriber");
 
 const app = createApp(App);
 app.config.globalProperties.$notify = ElNotification;
 app.component("WideBtn", WideBtn);
+app.component("Empty", Empty);
 app.component("ProfilePic", ProfilePic);
 app.directive("error", {
   beforeMount: (el) => {

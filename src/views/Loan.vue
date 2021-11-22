@@ -7,25 +7,34 @@
     </div>
     <div class="stocks_list clear-right">
       <p class="p-2 font-bold">Transactions:</p>
-      <LoanCard v-for="index in 12" :key="index" :index="index" />
+            <template v-if="loans.length <= 0">
+        <Empty>You have no loans</Empty>
+      </template>
+      <template v-else>
+        <LoanCard v-for="index in loans" :key="index" :index="index" />
+      </template>
+      
     </div>
 
     <LoanFormModal @toggleModal="toggleModal" v-if="isRequest" />
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import {useStore} from 'vuex';
 import LoanCard from "@/components/reusables_/LoanCard.vue";
 import LoanFormModal from "@/components/reusables_/LoanFormModal.vue";
 
 export default {
   name: "Loan",
   setup() {
+    const store = useStore()
     const isRequest = ref(false);
     const toggleModal = () => {
       isRequest.value = !isRequest.value;
     };
     return {
+      loans: computed(() => store.getters['assets/loans']),
       isRequest,
       toggleModal,
     };
