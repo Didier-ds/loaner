@@ -18,7 +18,7 @@
           Profile
         </li>
 
-        <li class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium">
+        <li @click="logout()" class="hover:bg-black-400 hover:text-white rounded cursor-pointer p-2 font-medium">
           Logout
         </li>
       </ul>
@@ -44,6 +44,11 @@ export default {
       this.close();
       this.$router.push({ name: any });
     },
+    logout(){
+      this.$store.dispatch('auth/logout').then(() => {
+        window.location.reload(true);
+      })
+    }
   },
 };
 </script>

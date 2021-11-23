@@ -1,11 +1,11 @@
 import auth from "@/services/auth"; 
-import { user } from "@/utils";
+// import { user } from "@/utils";
 
 export default {
   namespaced: true,
   state: {
     token: null,
-    user: user(),
+    user: null,
   },
   getters: {
     fullname(state) {
@@ -22,10 +22,16 @@ export default {
       return [];
     },
     user(state) {
+      if (state.user) {
       return state.user;
+      }
+      return null
     },
     userId(state) {
+      if (state.user) {
       return state.user.user_id;
+      }
+      return null
     },
     walletBalance(state) {
       if (state.user) {
@@ -69,6 +75,10 @@ export default {
         },
         (error) => Promise.reject(error)
       );
+    },
+    logout({commit}){
+      commit("SET_USER", null);
+      localStorage.removeItem("token");
     },
     updateProfile({state}, data){
       const id = state.user.user_id

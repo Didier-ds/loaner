@@ -82,7 +82,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 // import axios from "axios";
 import User from "../models/user";
 
@@ -97,6 +97,11 @@ export default {
       user: new User("", ""),
       errMessage: "",
     };
+  },
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated'
+    })
   },
   methods: {
     ...mapActions({
@@ -125,6 +130,9 @@ export default {
       );
       this.isSpin = false;
     },
+    check(){
+      if(this.isAuthenticated) this.$router.push({'path': '/'})
+    }
   },
   validations() {
     return {
@@ -140,5 +148,8 @@ export default {
       },
     };
   },
+  mounted(){
+    this.check()
+  }
 };
 </script>
