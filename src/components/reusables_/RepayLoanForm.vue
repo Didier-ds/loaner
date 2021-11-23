@@ -18,7 +18,7 @@
           />
         </svg>
       </div>
-      <p>Repay Loan</p>
+      <p class="text-xl font-medium">Loan Repayment</p>
       <!-- <div class="flex overflow-x-auto">
         <div
           :class="'active'"
@@ -81,7 +81,7 @@
             type="submit"
             class="bg-black rounded mx-auto flex items-center px-4 py-2 text-white font-medium"
           >
-            <BtnSpinner v-if="isSpin" /><span class="px-2">Request Loan</span>
+            <BtnSpinner v-if="isSpin" /><span class="px-2">Repay Loan</span>
           </button>
         <!-- <button class="bg-black rounded text-white font-medium p-2 px-4">Request Loan</button> -->
       </div>
@@ -108,7 +108,7 @@ export default {
     // const payment = ref(0)
     const data = reactive({
         loan_id: props.loanId,
-        payment: 1000.00
+        payment: 0
     })
     const isShow = ref(false);
     function closeForm(any){

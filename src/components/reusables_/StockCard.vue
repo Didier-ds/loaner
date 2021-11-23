@@ -35,7 +35,7 @@
         </div>
          <div class="text-center">
           <p class="font-medium text-gray-500 text-xs">percent flux</p>
-          <span  class="px-2 text-xs font-medium">{{ stock.percentage_change }}</span>
+          <span :class="color" class="px-2 text-xs font-medium">{{ stock.percentage_change }}</span>
         </div> 
         <div class="text-center">
           <p class="font-medium text-gray-500 text-xs">Equity Value</p>
@@ -119,21 +119,21 @@ export default {
       isSpin,
       purchase,
       quantity,
-      // color: computed(() => {
-      //   const sign = props.stock.percentage_change.charAt(0)
-      //   let classes;
-      //   switch(sign){
-      //     case '-':
-      //         classes = 'text-red-500';
-      //         break;
-      //     case '+':
-      //         classes = 'text-green-500';
-      //         break;
-      //         default:
-      //           classes = 'text-green-500'
-      //   }
-      //   return classes
-      // }),
+       color: computed(() => {
+         const sign = props.stock.percentage_change.toString().charAt(0)
+         let classes;
+         switch(sign){
+           case '-':
+               classes = 'text-red-500';
+               break;
+           case '+':
+               classes = 'text-green-500';
+               break;
+               default:
+                 classes = 'text-green-500'
+         }
+         return classes
+       }),
       disable: computed(() => { if (quantity.value <= 0 || isSpin.value === true) { return true } return false  }),
       isShow,
       toggleCollapse
