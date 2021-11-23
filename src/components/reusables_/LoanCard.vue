@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative" @click="pushWithQuery(loan.id)">
     <Status :type="loan.status" />
     <div
       :style="{ '--order': index }"
@@ -46,6 +46,7 @@
   </div>
 </template>
 <script>
+import { useRouter } from 'vue-router'
 import Status from './Status.vue'
 
 export default {
@@ -53,6 +54,17 @@ export default {
   props: ["index", "loan"],
   components: {
     Status
+  },
+  setup() {
+    const router = useRouter()
+    // const route = useRoute()
+
+    function pushWithQuery(id) {
+      router.push({ name: 'Loan-Repayments', params: { id } })
+    }
+    return {
+      pushWithQuery
+    }
   }
 };
 </script>

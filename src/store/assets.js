@@ -69,7 +69,19 @@ export default {
           
         )
     },
-
+    // fetchRepayments(){
+    //   const id = this.state.auth.user.user_id
+    //     return assets.fetchRepayments(id).then((res) => {
+    //       // console.log(res)
+    //         // dispatch('refresh')
+    //         return Promise.resolve(res);
+    //       },
+    //       (error) => 
+    //         // console.log(error) 
+    //          Promise.reject(error)
+          
+    //     )
+    // },
   },
   modules: {}
 };
