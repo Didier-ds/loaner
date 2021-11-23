@@ -25,7 +25,7 @@
         </div>
         <div class="mx-4 flex-grow">
           <p class="stock_abbr font-bold">{{ stock.symbol }}</p>
-          <span class="px-2 text-xs text-green-600 font-medium">{{ stock.percentage_change }}</span>
+          
         </div>
       </div>
       <div class="stock_details border-t sm:border-0 py-2 w-full my-2 grid grid-cols-3 gap-10">
@@ -33,10 +33,10 @@
           <p class="font-medium text-gray-500 text-xs">Volume</p>
           <p>{{ stock.volume }}</p>
         </div>
-        <div class="text-center">
-          <p class="font-medium text-gray-500 text-xs">Price Share</p>
-          <p>5</p>
-        </div>
+         <div class="text-center">
+          <p class="font-medium text-gray-500 text-xs">percent flux</p>
+          <span  class="px-2 text-xs font-medium">{{ stock.percentage_change }}</span>
+        </div> 
         <div class="text-center">
           <p class="font-medium text-gray-500 text-xs">Equity Value</p>
           <p class="ibm font-bold break-words">${{ stock.unit_price }}</p>
@@ -119,6 +119,21 @@ export default {
       isSpin,
       purchase,
       quantity,
+      // color: computed(() => {
+      //   const sign = props.stock.percentage_change.charAt(0)
+      //   let classes;
+      //   switch(sign){
+      //     case '-':
+      //         classes = 'text-red-500';
+      //         break;
+      //     case '+':
+      //         classes = 'text-green-500';
+      //         break;
+      //         default:
+      //           classes = 'text-green-500'
+      //   }
+      //   return classes
+      // }),
       disable: computed(() => { if (quantity.value <= 0 || isSpin.value === true) { return true } return false  }),
       isShow,
       toggleCollapse

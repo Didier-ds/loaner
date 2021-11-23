@@ -18,7 +18,7 @@
           />
         </svg>
       </div>
-      <p>Request A Loan</p>
+      <p>Repay Loan</p>
       <!-- <div class="flex overflow-x-auto">
         <div
           :class="'active'"
@@ -72,21 +72,9 @@
       </div> -->
       <div class="my-4">
         <p class="font-medium">Amount</p>
-        <input type="text" class="border p-2 rounded w-full outline-none" v-model="amount"/>
+        <input type="number" class="border p-2 rounded w-full outline-none" v-model="data.payment"/>
       </div>
-      <div class="flex flex-col gap-6 sm:items-center my-4 sm:grid grid-cols-2">
-        <div class="w-full relative">
-        <p class="font-medium">Period</p>
-        <div class="border p-2 rounded w-full  outline-none" @click="toggleDropdown()">{{selectedMonth.name}}</div>
-        <transition name="fade">
-        <PackageDropdown v-if="isShow" :packages="packages" @selectPackage = "selectPackage" @closeForm = "closeForm" />
-        </transition>
-      </div>
-      <div>
-        <p class="font-medium">Payment Plan:</p>
-        <p class="ibm font-bold">${{ paymentSchedule }}</p>
-      </div>
-      </div>
+      
       <div class="float-right">
         <button
             @click = submit()
@@ -101,72 +89,53 @@
   </div>
 </template>
 <script>
-import {ref, computed} from 'vue'
+import {ref, reactive} from 'vue'
 import {useStore} from 'vuex'
 import { ElNotification, ElMessage } from "element-plus";
-import packages from '@/utils/packages'
-import PackageDropdown from './PackageDropdown.vue'
-import {GetPaymentSchedule} from '@/utils/'
 import BtnSpinner from "@/components/reusables_/BtnSpinner.vue";
 // import assets from '@/services/assets'
 
 export default {
   name: "RepayLoanForm",
+  props: {
+      loanId : {
+          type: String,
+          Default: '0'
+      }
+  },
   setup(props, context){
-    const selectedMonth = ref({
-      name: 'Choose Your Package',
-      value: 1,
-      rate: 1
-    })
     const store = useStore()
-    const amount = ref(0)
+    // const payment = ref(0)
+    const data = reactive({
+        loan_id: props.loanId,
+        payment: 1000.00
+    })
     const isShow = ref(false);
     function closeForm(any){
       isShow.value = any
     }
     const isSpin = ref(false)
-    const toggleDropdown = () => {
-      isShow.value = !isShow.value
-    }
-   const selectPackage = (any) => {
-      selectedMonth.value = any
-      
-      toggleDropdown()
-   }
+
    function close() {
       context.emit("toggleModal");
     }
     const submit = async () => {
       isSpin.value = true;
-      const data = {
-        amount: +amount.value,
-        duration: selectedMonth.value.value
-      }
+      data.payment = parseFloat(data.payment.toFixed(2))
       await new Promise((resolve) =>
         setTimeout(() => {
           resolve(
-            store.dispatch('assets/requestLoan', data).then(() => {
-              store.dispatch('assets/getAllLoans').then(() => {
-                
-                  close()
+              
+            store.dispatch('assets/repayLoan', data).then(() => {
+                context.emit("fetchRepayments")
+              close()
                 ElNotification({
-                  title: "Loan Requested",
+                  title: "Successful",
                   type: "success",
                   message: "",
                 });
                 isSpin.value = false;
-                close()
-              }).catch((err) => {
-                ElMessage({
-                  showClose: true,
-                  message: err.response.data.message,
-                  type: "warning",
-                  duration: 5000
-                });
-              })
-                isSpin.value = false;
-                // close()
-              
+                
             }).catch((err) => {
               isSpin.value = false;
               ElMessage({
@@ -185,20 +154,11 @@ export default {
     }
     return {
       submit,
-      amount,
-      toggleDropdown,
+      data,
       isShow,
       isSpin,
       close,
-      paymentSchedule: computed(() => {
-        const {value, rate} = selectedMonth.value
-        if (value <= 1) return 0
-        return GetPaymentSchedule(amount.value, value, rate)
-      }),
       closeForm,
-      packages,
-      selectedMonth,
-      selectPackage
     }
   },
   methods: {
@@ -206,7 +166,7 @@ export default {
   },
   components: {
     BtnSpinner,
-    PackageDropdown
+    
   }
 };
 </script>

@@ -24,5 +24,9 @@ export default {
   },
   fetchRepayments(loanId){
     return apiClient().get(`/payment/${loanId}`, { headers: authHeader() })
+  },
+  repayLoan(data){
+
+    return apiClient().post(`/payment/loan/${data.loan_id}`, {payment: data.payment}, { headers: authHeader() })
   }
 };
