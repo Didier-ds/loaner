@@ -4,11 +4,11 @@
       <div class="portfolio_card relative p-2 flex flex-col justify-between">
         <div>
           <p class="title pl-2">Portfolio Value:</p>
-          <p class="value text-3xl font-bold text-center">${{ formatCurrency(total) }}</p>
+          <p class="value text-3xl font-bold text-center">&#8358;{{ formatCurrency(total) }}</p>
         </div>
         <div>
           <p class="title pl-2">Wallet Balance:</p>
-          <p class="value text-3xl font-bold text-center">${{ formatCurrency(balance) }}</p>
+          <p class="value text-3xl font-bold text-center">&#8358;{{ formatCurrency(balance) }}</p>
         </div>
       </div>
       <div class="little_card_box grid grid-cols-2 gap-4">

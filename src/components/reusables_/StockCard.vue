@@ -38,8 +38,8 @@
           <span :class="color" class="px-2 text-xs font-medium">{{ stock.percentage_change }}</span>
         </div> 
         <div class="text-center">
-          <p class="font-medium text-gray-500 text-xs">Equity Value</p>
-          <p class="ibm font-bold break-words">${{ stock.unit_price }}</p>
+          <p class="font-medium text-gray-500 text-xs">Unit Price </p>
+          <p class="ibm font-bold break-words">&#8358;{{ stock.unit_price }}</p>
         </div>
       </div>
     </div>

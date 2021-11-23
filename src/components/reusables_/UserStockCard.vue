@@ -38,7 +38,7 @@
         </div>
         <div class="text-center">
           <p class="font-medium text-gray-500 text-xs">Unit Price</p>
-          <p class="ibm font-bold">${{ stock.unit_price }}</p>
+          <p class="ibm font-bold">&#8358;{{ stock.unit_price }}</p>
         </div>
       </div>
     </div>
