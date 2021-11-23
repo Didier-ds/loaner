@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import Nprogress from "nprogress";
 import Verify from "@/views/Verify.vue";
 // import Home from "../views/Home.vue";
@@ -82,7 +82,7 @@ const routes = [
   },
 ];
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes,
   // eslint-disable-next-line no-unused-vars
   scrollBehavior(to, from, savedPosition) {
@@ -92,11 +92,11 @@ const router = createRouter({
 router.beforeEach((to, _from, next) => {
   Nprogress.start();
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.getters["auth/isAuthenticated"]) {
-      next();
+    if (!store.getters["auth/isAuthenticated"]) {
+      next("/login");
       return;
     }
-    next("/login");
+    next();
   } else {
     next();
   }
