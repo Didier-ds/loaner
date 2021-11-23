@@ -56,11 +56,11 @@ export default {
         (error) => Promise.reject(error)
       );
     },
-    requestLoan({dispatch}, data){
+    requestLoan(_, data){
       // const id = this.state.auth.user.user_id
         return assets.requestLoan(data).then((res) => {
           // console.log(res)
-            dispatch('auth/refresh')
+            this.dispatch('auth/refresh')
             return Promise.resolve(res);
           },
           (error) => 
@@ -69,7 +69,19 @@ export default {
           
         )
     },
-
+     repayLoan( _,data){
+      //  const id = this.state.auth.user.user_id
+         return assets.repayLoan(data).then((res) => {
+           // console.log(res)
+             this.dispatch('auth/refresh')
+             return Promise.resolve(res);
+           },
+           (error) => 
+             // console.log(error) 
+              Promise.reject(error)
+          
+         )
+     },
   },
   modules: {}
 };

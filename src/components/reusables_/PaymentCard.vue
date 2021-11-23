@@ -1,6 +1,6 @@
 <template>
-  <div class="relative" @click="pushWithQuery(loan.id)">
-    <Status :type="loan.status" />
+  <div class="relative" >
+    <!-- <Status :type="loan.status" /> -->
     <div
       :style="{ '--order': index }"
       id="stockcard"
@@ -24,22 +24,22 @@
       <div class="stock_name_container my-2 w-full grid grid-cols-2 gap-10">
         <div class="text-center">
           <p class="stock_abbr text-gray-500 font-medium">Date</p>
-          <p class="stock_fullname text-gray-600">{{loan.created_at.slice(0, 10)}}</p>
+          <p class="stock_fullname text-gray-600">{{payment.date.slice(0, 10)}}</p>
         </div>
         <div class="text-center">
-          <p class="font-medium text-gray-500">Duration</p>
-          <p class="font-medium">{{loan.duration}} Months</p>
+          <p class="font-medium text-gray-500">Payment</p>
+          <p class="ibm font-bold text-green-600">{{payment.payment}}</p>
         </div>
       </div>
       <div class="stock_details py-2 w-full my-2 grid grid-cols-2 gap-10">
         <div class="text-center">
           <p class="font-medium text-gray-500">Amount</p>
-          <p class="ibm font-bold">{{formatCurrency(loan.amount)}} </p>
+          <p class="ibm font-bold">{{formatCurrency(payment.amount)}} </p>
           
         </div>
         <div class="text-center">
-          <p class="font-medium text-gray-500">Paid</p>
-          <p class="ibm font-bold text-green-600">${{ formatCurrency(loan.paid) }}</p>
+          <p class="font-medium text-gray-500">Balance</p>
+          <p class="ibm font-bold text-yellow-600">${{ formatCurrency(payment.balance) }}</p>
         </div>
       </div>
     </div>
@@ -47,13 +47,13 @@
 </template>
 <script>
 import { useRouter } from 'vue-router'
-import Status from './Status.vue'
+// import Status from './Status.vue'
 
 export default {
   name: "StockCard",
-  props: ["index", "loan"],
+  props: ["index", "payment"],
   components: {
-    Status
+    // Status
   },
   setup() {
     const router = useRouter()
