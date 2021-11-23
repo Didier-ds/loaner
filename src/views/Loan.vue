@@ -2,7 +2,7 @@
   <div>
     <div class="text-center my-2">
       <p class="font-medium">Wallet Balance</p>
-      <p class="text-3xl font-extrabold ibm">${{formatCurrency(balance)}}</p>
+      <p class="text-3xl font-extrabold ibm">&#8358;{{formatCurrency(balance)}}</p>
     </div>
     <div class="float-right">
       <button @click="toggleModal" class="flex items-center p-2 border inline-block rounded">

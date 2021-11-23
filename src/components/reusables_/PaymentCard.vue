@@ -39,7 +39,7 @@
         </div>
         <div class="text-center">
           <p class="font-medium text-gray-500">Balance</p>
-          <p class="ibm font-bold text-yellow-600">${{ formatCurrency(payment.balance) }}</p>
+          <p class="ibm font-bold text-yellow-600">&#8358;{{ formatCurrency(payment.balance) }}</p>
         </div>
       </div>
     </div>
