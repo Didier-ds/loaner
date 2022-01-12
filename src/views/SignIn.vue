@@ -43,7 +43,7 @@
             <label class="input_label">Your Password</label>
             <input
               :class="{ invalid_input: v$.user.password.$errors.length }"
-              class="form_input"
+              class="form_input focus:shadow-md hover:border-black-500"
               type="password"
               v-model="user.password"
               @blur="v$.user.password.$touch"
@@ -84,6 +84,7 @@ import useVuelidate from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
 import { mapActions, mapGetters } from "vuex";
 // import axios from "axios";
+import { ElNotification } from "element-plus";
 import User from "../models/user";
 
 export default {
@@ -121,8 +122,15 @@ export default {
             this.login(this.user)
               .then(() => {
                 this.$router.push({ name: "Verify" });
+                this.isSpin = false;
               })
               .catch((err) => {
+                ElNotification({
+                    title: "Something Went Wrong",
+                    type: "error",
+                    message: "",
+                  })
+                this.isSpin = false;
                 this.errMessage = err.response.data.message;
               })
           );
