@@ -56,6 +56,11 @@ body {
     box-shadow: #eb4a27;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+  .form_input:focus {
+    border-color: #0c1825;
+    --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
   .form_input.invalid_input:hover {
     border-color: #eb4a27;
     box-shadow: 0 0 0 rgb(255, 182, 182);
